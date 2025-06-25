@@ -1,0 +1,12 @@
+.todosSection {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-top: 1rem;
+}
+
+.todosControls {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}

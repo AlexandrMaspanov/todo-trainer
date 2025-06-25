@@ -1,0 +1,15 @@
+.todoItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.check:checked + span {
+    text-decoration: line-through;
+}
+
+.delete {
+    border: 2px solid red;
+    background-color: pink;
+    color: red;
+}

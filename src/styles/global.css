@@ -1,0 +1,32 @@
+html {
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+header,
+main,
+footer {
+    padding: 1rem 0;
+}
+
+h1, h2, h3,
+h4, h5, h6,
+p, ul, li {
+    margin: 0;
+    padding: 0;
+}
+
+@media (max-width: 600px) {
+    html {
+        font-size: 14px;
+    }
+}
