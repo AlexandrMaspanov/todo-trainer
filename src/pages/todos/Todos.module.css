@@ -2,11 +2,17 @@
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    margin-top: 1rem;
 }
 
 .todosControls {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
     gap: 1rem;
+}
+
+@media (max-width: 768px) {
+    .todosControls {
+        flex-direction: column;
+        justify-content: normal;
+    }
 }

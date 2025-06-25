@@ -1,6 +1,6 @@
 import React from 'react';
-import styles from './TodoItem.module.css';
 import CustomButton from '../../customButton/CustomButton';
+import styles from './TodoItem.module.css';
 
 const TodoItem = ({ id, title, completed }) => {
     const toggleTodoComplete = (todoId) => {
@@ -14,10 +14,10 @@ const TodoItem = ({ id, title, completed }) => {
                 checked={completed}
                 onChange={() => toggleTodoComplete(id)}
                 readOnly
-                className={styles.check}
+                className={styles.inputCheckbox}
             />
-            <span>{title}</span>
-            <CustomButton className={styles.delete}>Удалить</CustomButton>
+            <span className={styles.title}>{title}</span>
+            <CustomButton className={styles.delete}>🗑</CustomButton>
         </li>
     );
 }

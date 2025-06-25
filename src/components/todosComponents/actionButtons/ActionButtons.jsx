@@ -6,7 +6,7 @@ const ActionButtons = () => {
   return (
     <div className={styles.todosActions}>
       <CustomButton>Очистить выполненные</CustomButton>
-      <CustomButton>Добавить задачу</CustomButton>
+      <CustomButton>+ Добавить задачу</CustomButton>
     </div>
   );
 }

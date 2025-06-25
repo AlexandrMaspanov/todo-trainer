@@ -2,14 +2,22 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 0.5rem 1rem;
+    border-bottom: 3px solid #e1e6eb;
 }
 
-.check:checked + span {
+.inputCheckbox:checked + span {
     text-decoration: line-through;
 }
 
 .delete {
+    padding: 0 1rem;
     border: 2px solid red;
-    background-color: pink;
+    background-color: #fed0d7;
+    font-size: 1.5rem;
     color: red;
+}
+
+.delete:hover {
+    background-color: #ff8b9c;
 }
