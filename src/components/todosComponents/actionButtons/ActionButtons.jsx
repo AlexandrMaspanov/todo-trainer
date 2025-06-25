@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { addTodo, removeAllCompleted } from '../../../store/todoSlice';
+import { addTodo, clearCompleted } from '../../../store/todoSlice';
 import CustomButton from '../../customButton/CustomButton';
 import styles from './ActionButtons.module.css';
 
@@ -14,7 +14,7 @@ const ActionButtons = () => {
 
   return (
     <div className={styles.todosActions}>
-      <CustomButton onClick={() => dispatch(removeAllCompleted())}>Очистить выполненные</CustomButton>
+      <CustomButton onClick={() => dispatch(clearCompleted())}>Очистить выполненные</CustomButton>
       <CustomButton onClick={addTask}>+ Добавить задачу</CustomButton>
     </div>
   );
