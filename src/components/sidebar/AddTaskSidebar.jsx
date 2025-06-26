@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addTodo } from '../../store/todoSlice';
 import CustomButton from '../customButton/CustomButton';
+import InputField from '../inputField/InputField';
 import styles from './AddTaskSidebar.module.css';
 
-const AddTaskSidebar = ({ isOpen, onClose }) => {
+const AddTaskSidebar = ({ isSidebarOpen, onClose }) => {
   const [inputValue, setInputValue] = useState('');
   const dispatch = useDispatch();
 
@@ -33,39 +34,32 @@ const AddTaskSidebar = ({ isOpen, onClose }) => {
 
   // Scroll lock
   useEffect(() => {
-    if (isOpen) {
+    if (isSidebarOpen) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = '';
     }
 
     return () => document.body.style.overflow = '';
-  }, [isOpen]);
+  }, [isSidebarOpen]);
 
   return (
-    <>
-    <div
-      className={`${styles.overlay} ${isOpen ? styles.visible : ''}`}
-      onClick={onClose}
-    />
-    <aside className={`${styles.sidebar} ${isOpen ? styles.open : ''}`}>
+    <aside className={`${styles.sidebar} ${isSidebarOpen ? styles.open : ''}`}>
       <div className={styles.header}>
         <h2>Новая задача</h2>
         <CustomButton className={styles.closeButton} onClick={onClose}>X</CustomButton>
       </div>
 
       <form className={styles.form} onSubmit={handleSubmit}>
-        <input
-          type='text'
-          placeholder='Введите название задачи'
-          className={styles.input}
+        <InputField
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
+          placeholder = 'Введите название задачи'
+          required
         />
         <CustomButton type='submit' className={styles.submitButton}>Добавить</CustomButton>
       </form>
     </aside>
-    </>
   );
 }
 

@@ -1,4 +1,5 @@
 .todoItem {
+    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -6,11 +7,65 @@
     border-bottom: 3px solid #e1e6eb;
 }
 
+.todoItemEditing {
+    z-index: 1001;
+}
+
 .inputCheckbox:checked + span {
     text-decoration: line-through;
 }
 
-.delete {
+.inputEdit {
+    padding-right: 6rem;
+}
+
+.editButtons {
+    position: absolute;
+    top: 0;
+    right: 2rem;
+    bottom: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.saveEditButton {
+    padding: 0.25rem 0.5rem;
+    border-color: green;
+    background-color: #aefeb4;
+    color: green;
+}
+
+.saveEditButton:hover {
+    border-color: green;
+    background-color: #5bfe68;
+    color: green;
+}
+
+.cancelEditButton {
+    padding: 0.25rem;
+    border-color: red;
+    background-color: #fed0d7;
+    font-size: 0.85rem;
+}
+
+.cancelEditButton:hover {
+    border-color: red;
+    background-color: #ff8b9c;
+}
+
+.todosButtons {
+    display: flex;
+    gap: 1rem;
+}
+
+.editButton {
+    padding: 0 0.75rem;
+    font-size: 1.5rem;
+}
+
+.deleteButton {
     padding: 0 1rem;
     border: 2px solid red;
     background-color: #fed0d7;
@@ -18,7 +73,7 @@
     color: red;
 }
 
-.delete:hover {
+.deleteButton:hover {
     border-color: red;
     background-color: #ff8b9c;
     color: red;

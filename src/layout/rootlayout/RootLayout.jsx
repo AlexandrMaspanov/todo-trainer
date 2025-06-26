@@ -1,6 +1,8 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { closeSidebar } from '../../store/sidebarSlice';
+import { stopEditing } from '../../store/uiSlice';
+import Overlay from '../../components/UI/overlay/Overlay';
 import Header from '../header/Header';
 import Main from '../main/Main';
 import Footer from '../footer/Footer';
@@ -8,15 +10,33 @@ import AddTaskSidebar from '../../components/sidebar/AddTaskSidebar';
 import styles from './RootLayout.module.css';
 
 const RootLayout = () => {
-  const isOpen = useSelector(state => state.sidebar.isOpen);
   const dispatch = useDispatch();
+
+  const editingId = useSelector(state => state.ui.editingId);
+  const isSidebarOpen = useSelector(state => state.sidebar.isOpen);
+
+  const showOverlay = editingId !== null || isSidebarOpen;
+
+  const handleOverlayClick = () => {
+    if (editingId !== null) {
+      dispatch(stopEditing());
+    }
+
+    if (isSidebarOpen) {
+      dispatch(closeSidebar());
+    }
+  }
 
   return (
     <div className={styles.layout}>
+      <Overlay
+        isVisible={showOverlay}
+        onClick={handleOverlayClick}
+      />
       <Header />
       <Main />
       <AddTaskSidebar
-        isOpen={isOpen}
+        isSidebarOpen={isSidebarOpen}
         onClose={() => dispatch(closeSidebar())}
       />
       <Footer />
