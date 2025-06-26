@@ -8,3 +8,25 @@
     list-style: none;
     background-color: #f5fafa;
 }
+
+.enter {
+    opacity: 0;
+    transform: translateY(-10px);
+}
+
+.enterActive {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.exit {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.exitActive {
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}

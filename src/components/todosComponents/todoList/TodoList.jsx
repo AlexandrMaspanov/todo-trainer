@@ -1,4 +1,5 @@
 import React from 'react';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { useSelector } from 'react-redux';
 import TodoItem from '../todoItem/TodoItem';
 import { selectFilteredTodos } from '../../../store/selectors';
@@ -12,9 +13,27 @@ const TodoList = () => {
       {todos.length === 0 ? (
         <li>Нет задач</li>
       ) : (
-        todos.map(todo => (
-          <TodoItem key={todo.id} {...todo} />
-        ))
+        <TransitionGroup component={null}>
+          {todos.map(todo => {
+            const nodeRef = React.createRef();
+
+            return (
+              <CSSTransition
+                key={todo.id}
+                timeout={300}
+                classNames={{
+                  enter: styles.enter,
+                  enterActive: styles.enterActive,
+                  exit: styles.exit,
+                  exitActive: styles.exitActive,
+                }}
+                nodeRef={nodeRef}
+              >
+                <TodoItem ref={nodeRef} {...todo} />
+              </CSSTransition>
+            );
+          })}
+        </TransitionGroup>
       )}
     </ul>
   );

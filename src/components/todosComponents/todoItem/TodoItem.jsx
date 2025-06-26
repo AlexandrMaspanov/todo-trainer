@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { forwardRef, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleTodoComplete, updateTodo, removeTodo } from '../../../store/todoSlice';
 import { startEditing, stopEditing } from '../../../store/uiSlice';
@@ -9,7 +9,8 @@ import EditButton from './todosButtons/EditButton';
 import DeleteButton from './todosButtons/DeleteButton';
 import styles from './TodoItem.module.css';
 
-const TodoItem = ({ id, title, completed }) => {
+const TodoItem = forwardRef((props, ref) => {
+    const { id, title, completed, ...rest } = props;
     const dispatch = useDispatch();
     const editingId = useSelector(state => state.ui.editingId);
     const isEditing = editingId === id;
@@ -51,11 +52,15 @@ const TodoItem = ({ id, title, completed }) => {
     }
 
     const handleDelete = () => {
-        dispatch(removeTodo({id}));
+        dispatch(removeTodo({ id }));
     }
 
     return (
-        <li className={`${styles.todoItem} ${isEditing ? styles.todoItemEditing : ''}`}>
+        <li
+            ref={ref}
+            {...rest}
+            className={`${styles.todoItem} ${isEditing ? styles.todoItemEditing : ''}`}
+        >
             {isEditing ? (
                 <>
                     <InputField
@@ -90,6 +95,6 @@ const TodoItem = ({ id, title, completed }) => {
             }
         </li>
     );
-}
+});
 
 export default TodoItem;
