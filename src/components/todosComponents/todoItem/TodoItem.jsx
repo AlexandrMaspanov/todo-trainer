@@ -13,8 +13,8 @@ const TodoItem = ({ id, title, completed }) => {
                 type="checkbox"
                 checked={completed}
                 onChange={() => dispatch(toggleTodoComplete({id}))}
-                readOnly
                 className={styles.inputCheckbox}
+                readOnly
             />
             <span className={styles.title}>{title}</span>
             <CustomButton className={styles.delete} onClick={() => dispatch(removeTodo({id}))}>🗑</CustomButton>

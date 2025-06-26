@@ -19,5 +19,7 @@
 }
 
 .delete:hover {
+    border-color: red;
     background-color: #ff8b9c;
+    color: red;
 }
