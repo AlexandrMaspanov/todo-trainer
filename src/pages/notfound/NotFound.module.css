@@ -7,15 +7,47 @@
     height: 100vh;
     padding: 2rem;
     text-align: center;
-    color: #333;
+    background-color: #f0f4f7;
+    color: #607d8b;
 }
 
 .title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    justify-content: center;
     font-size: 3rem;
     font-weight: bold;
+    color: #37474f;
 }
 
 .message {
     max-width: 50%;
     font-size: 1.5rem;
+    color: #90a4ae;
+}
+
+.icon {
+    display: inline-block;
+    animation: wobble 2.5s ease-in-out infinite;
+}
+
+@keyframes wobble {
+
+    0%,
+    100% {
+        transform: rotate(0deg);
+    }
+
+    20% {
+        transform: rotate(-3deg);
+    }
+
+    50% {
+        transform: rotate(1.5deg);
+    }
+
+    80% {
+        transform: rotate(-1deg);
+    }
 }

@@ -1,6 +1,36 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
 .inputField {
     padding: 0.75rem 1rem;
     width: 100%;
-    border: 2px solid #4363ff;
+    border: 2px solid #b0bec5;
     border-radius: 0.5rem;
+    background-color: #ffffff;
+    color: #37474f;
+    font-size: 1rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.inputField:focus {
+    outline: none;
+    border-color: #607d8b;
+    box-shadow: 0 0 0 2px rgba(96, 125, 139, 0.2);
+}
+
+.inputField::placeholder {
+    color: #90a4ae;
+}
+
+.error {
+  border-color: #d32f2f;
+}
+
+.errorMessage {
+  color: #d32f2f;
+  font-size: 0.875rem;
+  line-height: 1.2;
 }

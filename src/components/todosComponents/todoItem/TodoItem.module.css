@@ -1,80 +1,67 @@
 .todoItem {
-    position: relative;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: 0.5rem 1rem;
-    border-bottom: 3px solid #e1e6eb;
+    gap: 1rem;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    background-color: #ffffff;
+    box-shadow: 0 1px 4px rgba(96, 125, 139, 0.06);
+    transition: background-color 0.2s ease;
+}
+
+.todoItem:hover {
+    background-color: #f5fafa;
 }
 
 .todoItemEditing {
+    background-color: #f0f4f7;
     z-index: 1001;
 }
 
-.inputCheckbox:checked + span {
-    text-decoration: line-through;
+.inputCheckbox {
+    appearance: none;
+    width: 1.1rem;
+    height: 1.1rem;
+    border: 2px solid #607d8b;
+    border-radius: 0.25rem;
+    background-color: #fff;
+    cursor: pointer;
+    display: grid;
+    place-content: center;
+    transition: all 0.2s ease;
+}
+
+.inputCheckbox:checked {
+    background-color: #607d8b;
+}
+
+.inputCheckbox:checked::after {
+    content: '✔';
+    color: #fff;
+    font-size: 0.8rem;
 }
 
 .inputEdit {
-    padding-right: 6rem;
+    flex: 1;
 }
 
-.editButtons {
-    position: absolute;
-    top: 0;
-    right: 2rem;
-    bottom: 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.saveEditButton {
-    padding: 0.25rem 0.5rem;
-    border-color: green;
-    background-color: #aefeb4;
-    color: green;
-}
-
-.saveEditButton:hover {
-    border-color: green;
-    background-color: #5bfe68;
-    color: green;
-}
-
-.cancelEditButton {
-    padding: 0.25rem;
-    border-color: red;
-    background-color: #fed0d7;
-    font-size: 0.85rem;
-}
-
-.cancelEditButton:hover {
-    border-color: red;
-    background-color: #ff8b9c;
-}
-
+.editButtons,
 .todosButtons {
     display: flex;
-    gap: 1rem;
+    align-items: center;
+    gap: 0.5rem;
+    margin-left: auto;
 }
 
-.editButton {
-    padding: 0 0.75rem;
-    font-size: 1.5rem;
+.title {
+    flex: 1;
+    font-size: 1rem;
+    color: #37474f;
+    word-break: break-word;
 }
 
-.deleteButton {
-    padding: 0 1rem;
-    border: 2px solid red;
-    background-color: #fed0d7;
-    font-size: 1.5rem;
-    color: red;
-}
-
-.deleteButton:hover {
-    border-color: red;
-    background-color: #ff8b9c;
-    color: red;
+/* Линия через текст при выполнении */
+.inputCheckbox:checked+.title {
+    text-decoration: line-through;
+    color: #90a4ae;
 }

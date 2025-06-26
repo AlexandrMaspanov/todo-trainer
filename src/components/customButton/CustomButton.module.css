@@ -1,37 +1,104 @@
 .button {
     display: inline-block;
     padding: 0.75rem 1.5rem;
-    border: 2px solid #4363ff;
     border-radius: 0.5rem;
-    background-color: #e1f0ff;
-    color: #4363ff;
     font-weight: 600;
-    text-decoration: none;
     cursor: pointer;
     transition:
-        border-color 0.2s ease-in-out,
-        background-color 0.2s ease-in-out,
-        box-shadow 0.2s ease-in-out,
-        color 0.2s ease-in-out;
+        background-color 0.3s ease,
+        box-shadow 0.3s ease;
 }
 
-.button:hover {
-    border-color: #334bc2;
-    background-color: #334bc2;
-    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
-    color: #e1f0ff;
+/* === Primary (по умолчанию) === */
+.primary {
+    background-color: #607d8b;
+    color: #fff;
+    border: none;
 }
 
-.button:active {
+.primary:hover {
+    background-color: #546e7a;
+    box-shadow: 2px 2px 4px rgba(96, 125, 139, 0.3);
+}
+
+.primary:active {
+    transform: translate(1px, 1px);
     box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* === Outline === */
+.outline {
+    background-color: transparent;
+    color: #607d8b;
+    border: 2px solid #607d8b;
+}
+
+.outline:hover {
+    background-color: #eef3f6;
+    color: #37474f;
+}
+
+.outline:active {
+    transform: translate(1px, 1px);
+    box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* === Ghost === */
+.ghost {
+    padding: 0.25rem;
+    background-color: transparent;
+    border: none;
+    font-size: 1.5rem;
+    color: #607d8b;
+}
+
+.ghost:hover {
+    background-color: rgba(96, 125, 139, 0.05);
+}
+
+.ghost:active {
     transform: translate(1px, 1px);
 }
 
+/* === Минимальный === */
+.minimal {
+    padding: 0.4rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1;
+    border: none;
+    background-color: transparent;
+    color: #607d8b;
+    transition: color 0.2s ease;
+}
+
+/* === Иконка === */
+.icon {
+    padding: 0.4rem;
+    font-size: 1.25rem;
+    line-height: 1;
+    background-color: transparent;
+    border: none;
+    color: #607d8b;
+    transition: color 0.2s ease;
+    cursor: pointer;
+}
+
+.minimal:hover,
+.icon:hover {
+    color: #90a4ae;
+    background-color: rgba(96, 125, 139, 0.05);
+}
+
+.minimal:active,
+.icon:active {
+    color: #ffffff;
+    background-color: rgba(96, 125, 139, 0.1);
+}
+
 .button:disabled {
-    opacity: 0.7;
-    border-color: #8c8f92;
-    background-color: #ccc;
-    box-shadow: none;
-    color: #666;
+    opacity: 0.6;
+    background-color: #cfd8dc;
+    color: #777;
     cursor: not-allowed;
+    box-shadow: none;
 }

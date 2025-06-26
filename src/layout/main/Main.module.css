@@ -3,5 +3,6 @@
     flex-direction: column;
     gap: 2rem;
     flex: 1;
-    background-color: #e1e6eb;
+    padding: 2rem 0;
+    background-color: #f0f4f7;
 }

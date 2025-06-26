@@ -47,7 +47,7 @@ const AddTaskSidebar = ({ isSidebarOpen, onClose }) => {
     <aside className={`${styles.sidebar} ${isSidebarOpen ? styles.open : ''}`}>
       <div className={styles.header}>
         <h2>Новая задача</h2>
-        <CustomButton className={styles.closeButton} onClick={onClose}>X</CustomButton>
+        <CustomButton variant='minimal' onClick={onClose}>X</CustomButton>
       </div>
 
       <form className={styles.form} onSubmit={handleSubmit}>

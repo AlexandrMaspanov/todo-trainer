@@ -21,7 +21,9 @@ const NotFound = () => {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>{title}</h1>
+      <h1 className={styles.title}>
+      <span className={styles.icon}>🗺️</span> {title}
+      </h1>
       <p className={styles.message}>{message}</p>
       <CustomLink to='/'>На главную</CustomLink>
     </div>

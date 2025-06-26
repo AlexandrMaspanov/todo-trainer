@@ -2,23 +2,48 @@
     display: flex;
     flex-direction: column;
     gap: 2rem;
+    padding: 2rem;
+    background-color: #ffffff;
+    border-radius: 0.75rem;
+    box-shadow: 0 6px 16px rgba(96, 125, 139, 0.06);
 }
 
+/* Основная панель управления */
 .todosControls {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
     gap: 1rem;
+    align-items: center;
 }
 
+/* Кнопки: Очистить / Добавить */
 .todosActions {
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
 }
 
-@media (max-width: 768px) {
+/* Планшеты и ноутбуки */
+@media (max-width: 1024px) {
     .todosControls {
         flex-direction: column;
-        justify-content: normal;
+        align-items: stretch;
+    }
+}
+
+/* Смартфоны */
+@media (max-width: 600px) {
+    .todosActions {
+        flex-direction: column;
+    }
+
+    .todosSection {
+        padding: 1rem;
+        gap: 1.5rem;
+    }
+
+    .todosActions button {
+        width: 100%;
     }
 }

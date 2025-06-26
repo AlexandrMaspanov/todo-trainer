@@ -3,10 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toggleTodoComplete, updateTodo, removeTodo } from '../../../store/todoSlice';
 import { startEditing, stopEditing } from '../../../store/uiSlice';
 import InputField from '../../inputField/InputField';
-import SaveEditButton from './editButtons/SaveEditButton';
-import CancelEditButton from './editButtons/CancelEditButton';
-import EditButton from './todosButtons/EditButton';
-import DeleteButton from './todosButtons/DeleteButton';
+import CustomButton from '../../customButton/CustomButton';
 import styles from './TodoItem.module.css';
 
 const TodoItem = forwardRef((props, ref) => {
@@ -37,6 +34,14 @@ const TodoItem = forwardRef((props, ref) => {
         dispatch(stopEditing());
     }
 
+    const handleToggle = () => {
+        dispatch(toggleTodoComplete({ id }));
+    }
+
+    const handleDelete = () => {
+        dispatch(removeTodo({ id }));
+    }
+
     const handleKeyDown = (e) => {
         if (e.key === 'Enter') {
             e.preventDefault();
@@ -45,14 +50,6 @@ const TodoItem = forwardRef((props, ref) => {
             e.preventDefault();
             handleCancel();
         }
-    }
-
-    const handleToggle = () => {
-        dispatch(toggleTodoComplete({ id }));
-    }
-
-    const handleDelete = () => {
-        dispatch(removeTodo({ id }));
     }
 
     return (
@@ -72,8 +69,21 @@ const TodoItem = forwardRef((props, ref) => {
                         autoFocus
                     />
                     <div className={styles.editButtons}>
-                        <SaveEditButton className={styles.saveEditButton} onClick={handleSave} />
-                        <CancelEditButton className={styles.cancelEditButton} onClick={handleCancel} />
+                        <CustomButton
+                            variant="minimal"
+                            aria-label="Сохранить изменения"
+                            onClick={handleSave}
+                        >
+                            ✔
+                        </CustomButton>
+
+                        <CustomButton
+                            variant="minimal"
+                            aria-label="Отменить редактирование"
+                            onClick={handleCancel}
+                        >
+                            ✖
+                        </CustomButton>
                     </div>
                 </>
             ) : (
@@ -87,8 +97,22 @@ const TodoItem = forwardRef((props, ref) => {
                     />
                     <span className={styles.title}>{title}</span>
                     <div className={styles.todosButtons}>
-                        <EditButton className={styles.editButton} onClick={handleEdit} />
-                        <DeleteButton className={styles.deleteButton} onClick={handleDelete} />
+                        <CustomButton
+                            variant="ghost"
+                            aria-label="Редактировать задачу"
+                            onClick={handleEdit}
+                        >
+                            ✎
+                        </CustomButton>
+
+                        <CustomButton
+                            variant="ghost"
+                            aria-label="Удалить задачу"
+                            onClick={handleDelete}
+                        >
+                            🗑
+                        </CustomButton>
+
                     </div>
                 </>
             )

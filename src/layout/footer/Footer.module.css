@@ -2,5 +2,9 @@
     position: sticky;
     bottom: 0;
     width: 100%;
-    background-color: #f0f5fa;
+    background-color: #ffffff;
+    color: #607d8b;
+    text-align: center;
+    padding: 1rem 0;
+    box-shadow: 0 -2px 4px rgba(96, 125, 139, 0.1);
 }
