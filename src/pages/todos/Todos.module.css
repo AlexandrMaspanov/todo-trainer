@@ -10,6 +10,12 @@
     gap: 1rem;
 }
 
+.todosActions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
 @media (max-width: 768px) {
     .todosControls {
         flex-direction: column;

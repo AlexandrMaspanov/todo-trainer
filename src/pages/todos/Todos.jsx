@@ -1,6 +1,7 @@
 import React from 'react';
-import FilterSelect from '../../components/todosComponents/filterSelect/FilterSelect';
-import ActionButtons from '../../components/todosComponents/actionButtons/ActionButtons';
+import TodoFilter from '../../components/todosComponents/todoFilter/TodoFilter';
+import ClearCompleteButton from '../../components/todosComponents/actionButtons/ClearCompleteButton';
+import AddTaskButton from '../../components/todosComponents/actionButtons/AddTaskButton';
 import TodoList from '../../components/todosComponents/todoList/TodoList';
 import styles from './Todos.module.css';
 
@@ -10,8 +11,11 @@ const Todos = () => {
       <h1>Список задач</h1>
       <section className={styles.todosSection}>
         <div className={styles.todosControls}>
-          <FilterSelect />
-          <ActionButtons />
+          <TodoFilter />
+          <div className={styles.todosActions}>
+            <ClearCompleteButton />
+            <AddTaskButton />
+          </div>
         </div>
 
         <TodoList />
