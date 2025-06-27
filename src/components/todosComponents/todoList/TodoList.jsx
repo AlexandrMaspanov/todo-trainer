@@ -3,9 +3,11 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { useSelector } from 'react-redux';
 import TodoItem from '../todoItem/TodoItem';
 import { selectFilteredTodos } from '../../../store/selectors';
+import { useTodosStorage } from '../../../hooks/useTodosStorage';
 import styles from './TodoList.module.css';
 
 const TodoList = () => {
+  useTodosStorage();
   const todos = useSelector(selectFilteredTodos);
 
   return (

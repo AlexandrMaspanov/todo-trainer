@@ -1,11 +1,22 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { USER_KEY } from "../constants/user";
+
+const loadFromLocalStorage = () => {
+    try {
+        const data = localStorage.getItem(`todos:${USER_KEY}`);
+        return data ? JSON.parse(data) : [];
+    } catch {
+        return [];
+    }
+}
 
 const initialState = {
-    todos: [
-        {id: 1, title: 'Learn JS', completed: true},
-        {id: 2, title: 'Learn React', completed: false},
-        {id: 3, title: 'Learn Redux', completed: false},
-    ]
+    todos: loadFromLocalStorage(),
+    // [
+    //     {id: 1, title: 'Learn JS', completed: true},
+    //     {id: 2, title: 'Learn React', completed: false},
+    //     {id: 3, title: 'Learn Redux', completed: false},
+    // ]
 };
 
 export const todoSlice = createSlice({

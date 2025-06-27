@@ -96,7 +96,7 @@
 }
 
 .button:disabled {
-    opacity: 0.6;
+    /*opacity: 0.6; /*- просвечивается из под Header*/
     background-color: #cfd8dc;
     color: #777;
     cursor: not-allowed;

@@ -60,7 +60,7 @@
     word-break: break-word;
 }
 
-/* Линия через текст при выполнении */
+/* Линия перечеркивающая текст при отметке выполнения задачи */
 .inputCheckbox:checked+.title {
     text-decoration: line-through;
     color: #90a4ae;

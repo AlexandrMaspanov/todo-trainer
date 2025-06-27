@@ -115,8 +115,7 @@ const TodoItem = forwardRef((props, ref) => {
 
                     </div>
                 </>
-            )
-            }
+            )}
         </li>
     );
 });
