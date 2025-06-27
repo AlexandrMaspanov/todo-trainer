@@ -2,6 +2,7 @@ import React, { forwardRef, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleTodoComplete, updateTodo, removeTodo } from '../../../store/todoSlice';
 import { startEditing, stopEditing } from '../../../store/uiSlice';
+import { useBodyScrollLock } from '../../../hooks/useBodyScrollLock';
 import InputField from '../../inputField/InputField';
 import CustomButton from '../../customButton/CustomButton';
 import styles from './TodoItem.module.css';
@@ -13,6 +14,8 @@ const TodoItem = forwardRef((props, ref) => {
     const isEditing = editingId === id;
 
     const [tempTitle, setTempTitle] = useState(title);
+
+    useBodyScrollLock(editingId !== null);
 
     useEffect(() => {
         if (!isEditing) setTempTitle(title);

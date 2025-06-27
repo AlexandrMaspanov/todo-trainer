@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addTodo } from '../../store/todoSlice';
+import { useBodyScrollLock } from '../../hooks/useBodyScrollLock';
 import CustomButton from '../customButton/CustomButton';
 import InputField from '../inputField/InputField';
 import styles from './AddTaskSidebar.module.css';
@@ -8,6 +9,8 @@ import styles from './AddTaskSidebar.module.css';
 const AddTaskSidebar = ({ isSidebarOpen, onClose }) => {
   const [inputValue, setInputValue] = useState('');
   const dispatch = useDispatch();
+
+  useBodyScrollLock(isSidebarOpen);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -31,17 +34,6 @@ const AddTaskSidebar = ({ isSidebarOpen, onClose }) => {
 
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [onClose]);
-
-  // Scroll lock
-  useEffect(() => {
-    if (isSidebarOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-
-    return () => document.body.style.overflow = '';
-  }, [isSidebarOpen]);
 
   return (
     <aside className={`${styles.sidebar} ${isSidebarOpen ? styles.open : ''}`}>
