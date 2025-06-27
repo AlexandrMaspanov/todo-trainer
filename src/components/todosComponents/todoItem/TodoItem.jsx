@@ -1,4 +1,4 @@
-import React, { forwardRef, useState, useEffect } from 'react';
+import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleTodoComplete, updateTodo, removeTodo } from '../../../store/todoSlice';
 import { startEditing, stopEditing } from '../../../store/uiSlice';
@@ -15,7 +15,20 @@ const TodoItem = forwardRef((props, ref) => {
 
     const [tempTitle, setTempTitle] = useState(title);
 
+    const localRef = useRef(null);
+
+    useImperativeHandle(ref, () => localRef.current);
+
     useBodyScrollLock(editingId !== null);
+
+    useEffect(() => {
+        if (isEditing && localRef.current) {
+            localRef.current.scrollIntoView({
+                behavior: 'smooth',
+                block: 'center',
+            });
+        }
+    }, [isEditing]);
 
     useEffect(() => {
         if (!isEditing) setTempTitle(title);
@@ -57,7 +70,7 @@ const TodoItem = forwardRef((props, ref) => {
 
     return (
         <li
-            ref={ref}
+            ref={localRef}
             {...rest}
             className={`${styles.todoItem} ${isEditing ? styles.todoItemEditing : ''}`}
         >
