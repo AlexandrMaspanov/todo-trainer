@@ -8,8 +8,6 @@ export function useTodosStorage() {
     useEffect(() => {
         try {
             localStorage.setItem(`todos:${USER_KEY}`, JSON.stringify(todos));
-        } catch {
-            
-        }
+        } catch {}
     }, [todos]);
 }
