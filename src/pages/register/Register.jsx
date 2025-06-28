@@ -64,7 +64,7 @@ const Register = () => {
           placeholder='Имя пользователя'
           required
         />
-        <CustomButton type='submit'>
+        <CustomButton type='submit' fullWidth>
           Зарегистрироваться
         </CustomButton>
       </form>

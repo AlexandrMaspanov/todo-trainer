@@ -7,13 +7,14 @@ const CustomButton = ({
     className = '',
     variant = 'primary',
     hint,
+    fullWidth = false,
     ariaLabel,
     ...props
 }) => {
     const variantClass = styles[variant] || "";
 
     return (
-        <div className={styles.buttonWrapper}>
+        <div className={`${styles.buttonWrapper} ${fullWidth ? styles.fullWidth : ''}`}>
             <button
                 type={type}
                 aria-label={ariaLabel}

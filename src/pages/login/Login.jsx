@@ -6,6 +6,7 @@ import CustomButton from '../../components/customButton/CustomButton';
 import CustomLink from '../../components/customLink/CustomLink';
 import CustomSelect from '../../components/customSelect/CustomSelect';
 import Loader from '../../components/UI/loader/Loader';
+import useSnackbar from '../../hooks/useSnackbar';
 import { setTodos } from '../../store/todoSlice';
 import { getStoragedUsers, getTodosByUserId, setCurrentUserId } from '../../utils/storage';
 import styles from './Login.module.css';
@@ -16,6 +17,7 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { showSnackbar } = useSnackbar();
 
   useEffect(() => {
     setUsers(getStoragedUsers());
@@ -29,7 +31,10 @@ const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault();
 
-    if (!selectedUserId) return;
+    if (!selectedUserId) {
+      showSnackbar('Выберите пользователя', 'error');
+      return;
+    }
 
     setLoading(true);
     setCurrentUserId(selectedUserId);
@@ -37,6 +42,7 @@ const Login = () => {
     const userTodos = getTodosByUserId(selectedUserId);
     dispatch(setTodos(userTodos));
 
+    showSnackbar('Добро пожаловать!', 'success');
     navigate('/');
   }
 
@@ -60,7 +66,7 @@ const Login = () => {
             />
           </>
         )}
-        <CustomButton type='submit' disabled={!selectedUserId || loading}>
+        <CustomButton type='submit' disabled={!selectedUserId || loading} fullWidth>
           {loading ? <Loader /> : 'Войти'}
         </CustomButton>
       </form>
