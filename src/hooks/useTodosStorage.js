@@ -1,13 +1,12 @@
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { USER_KEY } from "../constants/user";
+import { getCurrentUserId, setTodosByUserId } from "../utils/storage";
 
 export function useTodosStorage() {
+    const userId = getCurrentUserId();
     const todos = useSelector(state => state.todos.todos);
 
     useEffect(() => {
-        try {
-            localStorage.setItem(`todos:${USER_KEY}`, JSON.stringify(todos));
-        } catch {}
+        setTodosByUserId(userId, todos);
     }, [todos]);
 }

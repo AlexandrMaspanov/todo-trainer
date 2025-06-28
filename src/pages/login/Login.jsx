@@ -1,22 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useUsersStorage } from '../../hooks/useUsersStorage';
+import { useDispatch } from 'react-redux';
 import CustomButton from '../../components/customButton/CustomButton';
 import CustomLink from '../../components/customLink/CustomLink';
 import CustomSelect from '../../components/customSelect/CustomSelect';
+import { setTodos } from '../../store/todoSlice';
+import { getStoragedUsers, getTodosByUserId, setCurrentUserId } from '../../utils/storage';
 import styles from './Login.module.css';
 
 const Login = () => {
-  useUsersStorage();
   const [users, setUsers] = useState([]);
   const [selectedUserId, setSelectedUserId] = useState('');
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    const stored = localStorage.getItem('users');
-    if (stored) {
-      setUsers(JSON.parse(stored))
-    }
+    setUsers(getStoragedUsers());
   }, []);
 
   const options = users.map(user => ({
@@ -29,7 +28,10 @@ const Login = () => {
 
     if (!selectedUserId) return;
 
-    localStorage.setItem('userId', selectedUserId);
+    setCurrentUserId(selectedUserId);
+
+    const userTodos = getTodosByUserId(selectedUserId);
+    dispatch(setTodos(userTodos));
 
     navigate('/');
   }
@@ -38,9 +40,9 @@ const Login = () => {
     <section className={styles.loginSection}>
       <h1>Вход</h1>
       <form onSubmit={handleLogin} className={styles.loginForm}>
-        <label htmlFor="user-select">Пользователь</label>
+        <label htmlFor="userselect">Пользователь</label>
         <CustomSelect
-          id='user-select'
+          id='userselect'
           value={selectedUserId}
           onChange={(e) => setSelectedUserId(e.target.value)}
           options={options}

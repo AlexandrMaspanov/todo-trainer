@@ -1,22 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { USER_KEY } from "../constants/user";
-
-const loadFromLocalStorage = () => {
-    try {
-        const data = localStorage.getItem(`todos:${USER_KEY}`);
-        return data ? JSON.parse(data) : [];
-    } catch {
-        return [];
-    }
-}
+import { getCurrentUserId, getTodosByUserId } from '../utils/storage';
 
 const initialState = {
-    todos: loadFromLocalStorage(),
-    // [
-    //     {id: 1, title: 'Learn JS', completed: true},
-    //     {id: 2, title: 'Learn React', completed: false},
-    //     {id: 3, title: 'Learn Redux', completed: false},
-    // ]
+    todos: getTodosByUserId(getCurrentUserId()),
 };
 
 export const todoSlice = createSlice({
@@ -47,10 +33,13 @@ export const todoSlice = createSlice({
         },
         clearCompleted(state) {
             state.todos = state.todos.filter(todo => !todo.completed);
-        }
+        },
+        setTodos(state, action) {
+            state.todos = action.payload;
+        },
     },
 });
 
-export const { addTodo, toggleTodoComplete, updateTodo, removeTodo, clearCompleted } = todoSlice.actions;
+export const { addTodo, toggleTodoComplete, updateTodo, removeTodo, clearCompleted, setTodos } = todoSlice.actions;
 
 export default todoSlice.reducer;
