@@ -7,7 +7,10 @@ const AddTaskButton = () => {
     const dispatch = useDispatch();
 
     return (
-        <CustomButton onClick={() => dispatch(openSidebar())}>
+        <CustomButton
+            onClick={() => dispatch(openSidebar())}
+            aria-label="Открыть форму добавления задачи"
+        >
             + Добавить задачу
         </CustomButton>
     );

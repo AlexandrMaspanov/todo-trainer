@@ -1,6 +1,22 @@
 .todosFilter {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    gap: 0.5rem;
+    gap: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    background-color: #f0f4f7;
+    max-width: 30rem;
+}
+
+.todosFilter label {
+    font-size: 0.95rem;
+    color: #607d8b;
+    white-space: nowrap;
+}
+
+@media (max-width: 600px) {
+    .todosFilter {
+        flex-direction: column;
+        align-items: stretch;
+    }
 }
