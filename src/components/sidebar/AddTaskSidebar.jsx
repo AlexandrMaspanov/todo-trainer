@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addTodo } from '../../store/todoSlice';
 import { useBodyScrollLock } from '../../hooks/useBodyScrollLock';
@@ -8,9 +8,18 @@ import styles from './AddTaskSidebar.module.css';
 
 const AddTaskSidebar = ({ isSidebarOpen, onClose }) => {
   const [inputValue, setInputValue] = useState('');
+  const inputRef = useRef(null);
   const dispatch = useDispatch();
 
   useBodyScrollLock(isSidebarOpen);
+
+  useEffect(() => {
+    if (isSidebarOpen) {
+      setTimeout(() => {
+        inputRef.current?.focus();
+      }, 100);
+    }
+  }, [isSidebarOpen]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -44,6 +53,7 @@ const AddTaskSidebar = ({ isSidebarOpen, onClose }) => {
 
       <form className={styles.form} onSubmit={handleSubmit}>
         <InputField
+          ref={inputRef}
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
           placeholder = 'Введите название задачи'

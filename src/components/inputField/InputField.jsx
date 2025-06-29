@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import styles from './InputField.module.css';
 
-const InputField = ({
+const InputField = forwardRef(({
   className = '',
   value,
   onChange,
@@ -9,10 +9,11 @@ const InputField = ({
   error = false,
   errorMessage = '',
   ...props
-}) => {
+}, ref) => {
   return (
     <div className={styles.wrapper}>
       <input
+        ref={ref}
         type="text"
         value={value}
         onChange={onChange}
@@ -25,6 +26,6 @@ const InputField = ({
       )}
     </div>
   );
-};
+});
 
 export default InputField;
