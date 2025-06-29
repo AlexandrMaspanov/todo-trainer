@@ -5,7 +5,7 @@ import InputField from '../../components/inputField/InputField';
 import CustomButton from '../../components/customButton/CustomButton';
 import useSnackbar from '../../hooks/useSnackbar';
 import { getStoragedUsers, setCurrentUserId, setStoragedUsers } from '../../utils/storage';
-import SNACK_TYPES from '../../constants/snackbarTypes';
+import { SNACK_TYPES } from '../../constants';
 import styles from './Register.module.css';
 
 const Register = () => {

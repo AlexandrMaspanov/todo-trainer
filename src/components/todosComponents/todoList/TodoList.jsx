@@ -1,7 +1,7 @@
 import React from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { useSelector } from 'react-redux';
-import EmptyState from '../emptyState/EmptyState';
+import EmptyState from '../../emptyState/EmptyState';
 import TodoItem from '../todoItem/TodoItem';
 import { selectFilteredTodos } from '../../../store/selectors';
 import { useTodosStorage } from '../../../hooks/useTodosStorage';

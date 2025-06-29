@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 import { useSnackbarContext } from '../context/SnackbarProvider';
 import { getCurrentUserId } from '../utils/storage';
-import SNACK_TYPES from '../constants/snackbarTypes';
+import { SNACK_TYPES } from '../constants';
 
 const RequireAuth = ({ children }) => {
     const location = useLocation();

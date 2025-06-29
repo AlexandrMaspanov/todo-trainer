@@ -9,13 +9,31 @@
 }
 
 .avatar {
-    width: 2rem;
-    height: 2rem;
     border-radius: 50%;
     object-fit: cover;
 }
 
 .icon {
-    font-size: 2rem;
     color: #90a4ae;
+}
+
+.sm .avatar,
+.sm .icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    font-size: 1.5rem;
+}
+
+.md .avatar,
+.md .icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 2.5rem;
+}
+
+.lg .avatar,
+.lg .icon {
+    width: 6rem;
+    height: 6rem;
+    font-size: 6rem;
 }

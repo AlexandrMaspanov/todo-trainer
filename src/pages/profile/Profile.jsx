@@ -1,12 +1,37 @@
 import React from 'react';
+import UserCard from '../../components/profileComponents/userCard/userCard';
+import CustomButton from '../../components/customButton/CustomButton';
+import { getStoragedUsers, getCurrentUserId } from '../../utils/storage';
 import styles from './Profile.module.css';
 
 const Profile = () => {
+  const users = getStoragedUsers();
+  const currentUserId = getCurrentUserId();
+  const user = users.find(u => u.id === currentUserId);
+
+  if (!user) {
+    return <div className={styles.empty}>Пользователь не найден</div>;
+  }
+
+  const handleEdit = () => console.log('Редактировать профиль');
+
   return (
-    <div>
-      <h1>Profile</h1>
-    </div>
+    <>
+      <section className={styles.profileSection}>
+        <div className={styles.headerRow}>
+          <h1 className="pageTitle">Профиль</h1>
+          <div className={styles.editButtonWrapper}>
+            <CustomButton variant="outline" fullWidth onClick={handleEdit}>
+              Редактировать
+            </CustomButton>
+          </div>
+
+        </div>
+
+        {user && <UserCard user={user} />}
+      </section>
+    </>
   );
-}
+};
 
 export default Profile;

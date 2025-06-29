@@ -7,20 +7,18 @@ import styles from './Todos.module.css';
 
 const Todos = () => {
   return (
-    <>
-      <h1>Список задач</h1>
-      <section className={styles.todosSection}>
-        <div className={styles.todosControls}>
-          <TodoFilter />
-          <div className={styles.todosActions}>
-            <ClearCompleteButton />
-            <AddTaskButton />
-          </div>
+    <section className={styles.todosSection}>
+      <h1 className="pageTitle">Список задач</h1>
+      <div className={styles.todosControls}>
+        <TodoFilter />
+        <div className={styles.todosActions}>
+          <ClearCompleteButton />
+          <AddTaskButton />
         </div>
+      </div>
 
-        <TodoList />
-      </section>
-    </>
+      <TodoList />
+    </section>
   );
 }
 

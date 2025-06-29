@@ -10,7 +10,7 @@ import Loader from '../../components/UI/loader/Loader';
 import useSnackbar from '../../hooks/useSnackbar';
 import { setTodos } from '../../store/todoSlice';
 import { getStoragedUsers, getTodosByUserId, setCurrentUserId } from '../../utils/storage';
-import SNACK_TYPES from '../../constants/snackbarTypes';
+import { SNACK_TYPES } from '../../constants';
 import styles from './Login.module.css';
 
 const Login = () => {
