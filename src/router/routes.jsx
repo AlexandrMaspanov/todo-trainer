@@ -20,7 +20,6 @@ const routes = [
         ],
     },
     {
-        path: '/',
         element: <AuthLayout />,
         children: [
             { path: 'login', element: <Login /> },
