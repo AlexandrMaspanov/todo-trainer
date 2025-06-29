@@ -6,7 +6,9 @@ const SnackbarContext = createContext();
 export const SnackbarProvider = ({ children }) => {
     const [snack, setSnack] = useState(null);
 
-    const showSnackbar = useCallback((message, type = 'info') => {
+    const showSnackbar = useCallback((message, type) => {
+        if (!type) return;
+
         setSnack({ message, type });
 
         setTimeout(() => setSnack(null), 3000); // авто-сброс

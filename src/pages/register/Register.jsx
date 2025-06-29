@@ -5,6 +5,7 @@ import InputField from '../../components/inputField/InputField';
 import CustomButton from '../../components/customButton/CustomButton';
 import useSnackbar from '../../hooks/useSnackbar';
 import { getStoragedUsers, setCurrentUserId, setStoragedUsers } from '../../utils/storage';
+import SNACK_TYPES from '../../constants/snackbarTypes';
 import styles from './Register.module.css';
 
 const Register = () => {
@@ -20,12 +21,12 @@ const Register = () => {
     const trimmed = name.trim();
 
     if (!trimmed) {
-      showSnackbar('Имя пользователя не может быть пустым', 'error');
+      showSnackbar('Имя пользователя не может быть пустым', SNACK_TYPES.ERROR);
       return;
     }
 
     if (trimmed.length < minLength) {
-      showSnackbar(`Минимум ${minLength} символа`, 'error');
+      showSnackbar(`Минимум ${minLength} символа`, SNACK_TYPES.ERROR);
       return;
     }
 
@@ -35,7 +36,7 @@ const Register = () => {
     const alreadyExists = users.some(user => user.name.toLowerCase() === trimmed.toLowerCase());
 
     if (alreadyExists) {
-      showSnackbar('Пользователь с таким именем уже существует', 'error');
+      showSnackbar('Пользователь с таким именем уже существует', SNACK_TYPES.ERROR);
       return;
     }
 
@@ -44,7 +45,7 @@ const Register = () => {
 
     setStoragedUsers(updatedUsers);
     setCurrentUserId(newUser.id);
-    showSnackbar('Пользователь зарегистрирован!', 'success');
+    showSnackbar('Пользователь зарегистрирован!', SNACK_TYPES.SUCCESS);
 
     navigate('/profile');
   }

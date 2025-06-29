@@ -9,6 +9,7 @@ import Loader from '../../components/UI/loader/Loader';
 import useSnackbar from '../../hooks/useSnackbar';
 import { setTodos } from '../../store/todoSlice';
 import { getStoragedUsers, getTodosByUserId, setCurrentUserId } from '../../utils/storage';
+import SNACK_TYPES from '../../constants/snackbarTypes';
 import styles from './Login.module.css';
 
 const Login = () => {
@@ -32,7 +33,7 @@ const Login = () => {
     e.preventDefault();
 
     if (!selectedUserId) {
-      showSnackbar('Выберите пользователя', 'error');
+      showSnackbar('Выберите пользователя', SNACK_TYPES.ERROR);
       return;
     }
 
@@ -42,7 +43,7 @@ const Login = () => {
     const userTodos = getTodosByUserId(selectedUserId);
     dispatch(setTodos(userTodos));
 
-    showSnackbar('Добро пожаловать!', 'success');
+    showSnackbar('Добро пожаловать!', SNACK_TYPES.SUCCESS);
     navigate('/');
   }
 

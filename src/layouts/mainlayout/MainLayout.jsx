@@ -7,9 +7,9 @@ import Header from '../header/Header';
 import Main from '../main/Main';
 import Footer from '../footer/Footer';
 import AddTaskSidebar from '../../components/sidebar/AddTaskSidebar';
-import styles from './RootLayout.module.css';
+import styles from './MainLayout.module.css';
 
-const RootLayout = () => {
+const MainLayout = () => {
   const dispatch = useDispatch();
 
   const editingId = useSelector(state => state.ui.editingId);
@@ -28,7 +28,7 @@ const RootLayout = () => {
   }
 
   return (
-    <div className={styles.layout}>
+    <div className={styles.mainLayout}>
       <Overlay
         isVisible={showOverlay}
         onClick={handleOverlayClick}
@@ -44,4 +44,4 @@ const RootLayout = () => {
   );
 }
 
-export default RootLayout;
+export default MainLayout;

@@ -1,6 +1,8 @@
 import { lazy } from 'react';
-import RootLayout from '../layout/rootlayout/RootLayout';
+import MainLayout from '../layouts/mainlayout/MainLayout';
+import AuthLayout from '../layouts/authlayout/AuthLayout';
 import NotFound from '../pages/notfound/NotFound';
+import RequireAuth from '../components/RequireAuth';
 
 const Todos = lazy(() => import('../pages/todos/Todos'));
 const Login = lazy(() => import('../pages/login/Login'));
@@ -10,14 +12,19 @@ const Profile = lazy(() => import('../pages/profile/Profile'));
 const routes = [
     {
         path: '/',
-        element: <RootLayout />,
+        element: <RequireAuth><MainLayout /></RequireAuth>,
         errorElement: <NotFound />,
         children: [
             { index: true, element: <Todos /> },
+            { path: 'profile', element: <Profile /> },
+        ],
+    },
+    {
+        path: '/',
+        element: <AuthLayout />,
+        children: [
             { path: 'login', element: <Login /> },
             { path: 'register', element: <Register /> },
-            { path: 'profile', element: <Profile /> },
-            // { path: 'profile', element: <RequireAuth><Profile /></RequireAuth> },
         ],
     },
 ];
