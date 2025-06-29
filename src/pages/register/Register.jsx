@@ -10,6 +10,8 @@ import styles from './Register.module.css';
 
 const Register = () => {
   const [name, setName] = useState('');
+  const [surname, setSurname] = useState('');
+  const [patronymic, setPatronymic] = useState('');
   const navigate = useNavigate();
 
   const { showSnackbar } = useSnackbar();
@@ -18,29 +20,35 @@ const Register = () => {
   const handleRegister = (e) => {
     e.preventDefault();
 
-    const trimmed = name.trim();
+    const trimmedName = name.trim();
 
-    if (!trimmed) {
-      showSnackbar('Имя пользователя не может быть пустым', SNACK_TYPES.ERROR);
+    if (!trimmedName) {
+      showSnackbar('Имя не может быть пустым', SNACK_TYPES.ERROR);
       return;
     }
 
-    if (trimmed.length < minLength) {
-      showSnackbar(`Минимум ${minLength} символа`, SNACK_TYPES.ERROR);
+    if (trimmedName.length < minLength) {
+      showSnackbar(`Имя должно быть минимум ${minLength} символа`, SNACK_TYPES.ERROR);
       return;
     }
 
-    const userId = `${trimmed.toLowerCase()}-${Date.now()}`;
     const users = getStoragedUsers();
 
-    const alreadyExists = users.some(user => user.name.toLowerCase() === trimmed.toLowerCase());
+    const alreadyExists = users.some(user => user.name.toLowerCase() === trimmedName.toLowerCase());
 
     if (alreadyExists) {
       showSnackbar('Пользователь с таким именем уже существует', SNACK_TYPES.ERROR);
       return;
     }
 
-    const newUser = { id: userId, name: trimmed };
+    const newUserId = `${trimmedName.toLowerCase()}-${Date.now()}`;
+    const newUser = {
+      id: newUserId,
+      name: trimmedName,
+      surname: surname.trim() || null,
+      patronymic: patronymic.trim() || null,
+      photo: null
+    };
     const updatedUsers = [...users, newUser];
 
     setStoragedUsers(updatedUsers);
@@ -57,14 +65,30 @@ const Register = () => {
         <label htmlFor="username" className={styles.userLabel}>
           <FaUserPlus className={styles.icon} />
         </label>
+
         <InputField
           autoFocus
           id='username'
           value={name}
           onChange={(e) => setName(e.target.value.trim())}
-          placeholder='Имя пользователя'
+          placeholder='Имя *'
           required
         />
+
+        <InputField
+          id="surname"
+          value={surname}
+          onChange={(e) => setSurname(e.target.value.trim())}
+          placeholder="Фамилия"
+        />
+
+        <InputField
+          id="patronymic"
+          value={patronymic}
+          onChange={(e) => setPatronymic(e.target.value.trim())}
+          placeholder="Отчество"
+        />
+
         <CustomButton type='submit' fullWidth>
           Зарегистрироваться
         </CustomButton>
