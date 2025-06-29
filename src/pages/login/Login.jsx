@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { FaUserCircle } from 'react-icons/fa';
+import UserPreview from '../../components/userPreview/UserPreview';
 import CustomButton from '../../components/customButton/CustomButton';
 import CustomLink from '../../components/customLink/CustomLink';
 import CustomSelect from '../../components/customSelect/CustomSelect';
@@ -47,6 +48,8 @@ const Login = () => {
     navigate('/');
   }
 
+  const selectedUser = users.find(u => u.id === selectedUserId);
+
   return (
     <section className={styles.loginSection}>
       <h1>Вход</h1>
@@ -65,6 +68,11 @@ const Login = () => {
               options={options}
               placeholder='Выберите пользователя'
             />
+
+            {selectedUser && (
+              <UserPreview photo={selectedUser.photo} name={selectedUser.name} />
+            )}
+
           </>
         )}
         <CustomButton type='submit' disabled={!selectedUserId || loading} fullWidth>
