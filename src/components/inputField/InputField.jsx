@@ -3,6 +3,7 @@ import styles from './InputField.module.css';
 
 const InputField = forwardRef(({
   className = '',
+  type = 'text',
   value,
   onChange,
   required = false,
@@ -14,7 +15,7 @@ const InputField = forwardRef(({
     <div className={styles.wrapper}>
       <input
         ref={ref}
-        type="text"
+        type={type}
         value={value}
         onChange={onChange}
         required={required}

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import BaseModal from '../../components/UI/baseModal/BaseModal';
+import EditProfileForm from '../../components/profileComponents/editProfileForm/EditProfileForm';
 import UserCard from '../../components/profileComponents/userCard/userCard';
 import CustomButton from '../../components/customButton/CustomButton';
 import { getStoragedUsers, getCurrentUserId } from '../../utils/storage';
@@ -22,7 +23,7 @@ const Profile = () => {
     <>
       {isEditing && (
         <BaseModal onClose={handleClose}>
-          <p>Здесь будет модальное окно редактирования профиля пользователя</p>
+          <EditProfileForm user={user} onClose={handleClose} />
         </BaseModal>
       )}
 
