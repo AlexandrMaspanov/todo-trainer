@@ -1,16 +1,16 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import CustomButton from '../../customButton/CustomButton';
 import styles from './AvatarUpload.module.css';
 
 const AvatarUpload = ({ value, onChange }) => {
   const fileInputRef = useRef(null);
+  const [isDragging, setIsDragging] = useState(false);
 
   const triggerFileInput = () => {
     fileInputRef.current.click();
   };
 
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
+  const handleFile = (file) => {
     if (!file) return;
 
     const reader = new FileReader();
@@ -21,8 +21,26 @@ const AvatarUpload = ({ value, onChange }) => {
     reader.readAsDataURL(file);
   };
 
+  const handleFileChange = (e) => {
+    handleFile(e.target.files[0]);
+  }
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    setIsDragging(false);
+    const droppedFile = e.dataTransfer?.files?.[0];
+    handleFile(droppedFile);
+  };
+
   return (
-    <div className={styles.avatarUploader}>
+    <div className={`${styles.avatarUploader} ${isDragging ? styles.dragging : ''}`}
+      onDragOver={(e) => {
+        e.preventDefault();
+        setIsDragging(true);
+      }}
+      onDragLeave={() => setIsDragging(false)}
+      onDrop={handleDrop}
+    >
       <div className={styles.previewWrapper}>
         <div className={styles.preview} onClick={triggerFileInput}>
           {value ? (
@@ -45,9 +63,9 @@ const AvatarUpload = ({ value, onChange }) => {
         <input
           type="file"
           accept='image/*'
-          onChange={handleFileChange}
           ref={fileInputRef}
-          className={styles.inputFile}
+          onChange={handleFileChange}
+          className={styles.fileInput}
         />
       </div>
     </div>
