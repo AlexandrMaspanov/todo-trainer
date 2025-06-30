@@ -3,6 +3,10 @@ import InputField from '../../inputField/InputField';
 import CustomSelect from '../../customSelect/CustomSelect';
 import CustomButton from '../../customButton/CustomButton';
 import AvatarUpload from '../../UI/avatarUpload/AvatarUpload';
+import {
+  getCurrentUserId,
+  updateUserById
+} from '../../../utils/storage';
 import styles from './EditProfileForm.module.css';
 
 const genderOptions = [
@@ -16,21 +20,27 @@ const EditProfileForm = ({ user, onClose }) => {
     name: user.name || '',
     surname: user.surname || '',
     patronymic: user.patronymic || '',
-    email: user.email || '',
-    gender: user.gender || '',
     birthdate: user.birthdate || '',
+    gender: user.gender || '',
+    email: user.email || '',
     photo: user.photo || '',
   });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('Сохранение профила', formData);
-    onClose();
+  const handleChange = (field) => (value) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
   }
 
-  const handleChange = (field) => (value) => {
-    console.log('Изменение профиля', { [field]: value });
-    setFormData((prev) => ({ ...prev, [field]: value }));
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const userId = getCurrentUserId();
+    if (!userId) {
+      console.warn('Не найден текущий пользователь');
+      return;
+    }
+
+    updateUserById(userId, formData);
+    onClose();
   }
 
   return (
@@ -49,8 +59,8 @@ const EditProfileForm = ({ user, onClose }) => {
           <div className={styles.fieldItem}>
             <label htmlFor="username">Имя</label>
             <InputField
-              autoFocus
               id='username'
+              autoFocus
               value={formData.name}
               onChange={handleChange('name')}
               placeholder='Имя *'
@@ -81,6 +91,28 @@ const EditProfileForm = ({ user, onClose }) => {
       </div>
 
       <div className={styles.fieldsSection}>
+      <div className={styles.fieldItem}>
+          <label htmlFor="birthdate">Дата рождения</label>
+          <InputField
+            id='birthdate'
+            type='date'
+            value={formData.birthdate}
+            onChange={handleChange('birthdate')}
+            placeholder='Дата рождения'
+          />
+        </div>
+
+        <div className={styles.fieldItem}>
+          <label htmlFor="gender">Пол</label>
+          <CustomSelect
+            id='gender'
+            options={genderOptions}
+            value={formData.gender}
+            onChange={(e) => handleChange('gender')(e.target.value)}
+            placeholder='Пол'
+          />
+        </div>
+
         <div className={styles.fieldItem}>
           <label htmlFor="email">Email</label>
           <InputField
@@ -89,28 +121,6 @@ const EditProfileForm = ({ user, onClose }) => {
             value={formData.email}
             onChange={handleChange('email')}
             placeholder='Email'
-          />
-        </div>
-
-        <div className={styles.fieldItem}>
-          <label htmlFor="email">Пол</label>
-          <CustomSelect
-            id='gender'
-            options={genderOptions}
-            value={formData.gender}
-            onChange={handleChange('gender')}
-            placeholder='Пол'
-          />
-        </div>
-
-        <div className={styles.fieldItem}>
-          <label htmlFor="birthdate">Дата рождения</label>
-          <InputField
-            id='birthdate'
-            type='date'
-            value={formData.birthdate}
-            onChange={handleChange('birthdate')}
-            placeholder='Дата рождения'
           />
         </div>
       </div>

@@ -34,8 +34,28 @@ export const getTodosByUserId = (userId) => {
     return data ? JSON.parse(data) : [];
 };
 
-// Сохранить список задач пользователя по его id в localStorage
+// Сохранить в localStorage список задач пользователя по его id
 export const setTodosByUserId = (userId, todos) => {
     if (!userId) return;
     localStorage.setItem(`todos: ${userId}`, JSON.stringify(todos));
+};
+
+// Получит пользователя по его id из localStorage
+export const getUserById = (userId) => {
+    if (!userId) return null;
+
+    const users = getStoragedUsers();
+    return users.find((user) => user.id === userId) || null;
+};
+
+// Обновить в localStorage профиль пользователя по его id
+export const updateUserById = (userId, patch) => {
+    if (!userId) return;
+
+    const users = getStoragedUsers();
+    const updatedUsers = users.map((user) =>
+        user.id === userId ? { ...user, ...patch } : user
+    );
+
+    setStoragedUsers(updatedUsers);
 };

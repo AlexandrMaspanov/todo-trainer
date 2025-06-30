@@ -1,10 +1,15 @@
 import React, { useRef, useState } from 'react';
+import { useSnackbarContext } from '../../../context/SnackbarProvider';
 import CustomButton from '../../customButton/CustomButton';
 import styles from './AvatarUpload.module.css';
+
+const MAX_FILE_SIZE = 1024 * 1024 * 2; // 2MB
 
 const AvatarUpload = ({ value, onChange }) => {
   const fileInputRef = useRef(null);
   const [isDragging, setIsDragging] = useState(false);
+
+  const { showSnackbar } = useSnackbarContext();
 
   const triggerFileInput = () => {
     fileInputRef.current.click();
@@ -12,6 +17,11 @@ const AvatarUpload = ({ value, onChange }) => {
 
   const handleFile = (file) => {
     if (!file) return;
+
+    if (file.size > MAX_FILE_SIZE) {
+      showSnackbar('Файл слишком большой (максимум 2MB)', 'error');
+      return;
+    }
 
     const reader = new FileReader();
     reader.onloadend = () => {
