@@ -55,7 +55,7 @@ const AddTaskSidebar = ({ isSidebarOpen, onClose }) => {
         <InputField
           ref={inputRef}
           value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
+          onChange={setInputValue}
           placeholder = 'Введите название задачи'
           required
         />

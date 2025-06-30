@@ -78,7 +78,7 @@ const TodoItem = forwardRef((props, ref) => {
                 <>
                     <InputField
                         value={tempTitle}
-                        onChange={(e) => setTempTitle(e.target.value)}
+                        onChange={setTempTitle}
                         onKeyDown={handleKeyDown}
                         placeholder='Введите название задачи'
                         className={styles.inputEdit}

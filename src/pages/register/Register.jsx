@@ -70,7 +70,7 @@ const Register = () => {
           autoFocus
           id='username'
           value={name}
-          onChange={(e) => setName(e.target.value.trim())}
+          onChange={setName}
           placeholder='Имя *'
           required
         />
@@ -78,14 +78,14 @@ const Register = () => {
         <InputField
           id="surname"
           value={surname}
-          onChange={(e) => setSurname(e.target.value.trim())}
+          onChange={setSurname}
           placeholder="Фамилия"
         />
 
         <InputField
           id="patronymic"
           value={patronymic}
-          onChange={(e) => setPatronymic(e.target.value.trim())}
+          onChange={setPatronymic}
           placeholder="Отчество"
         />
 
