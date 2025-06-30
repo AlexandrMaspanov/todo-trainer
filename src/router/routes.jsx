@@ -1,13 +1,18 @@
-import { lazy } from 'react';
+// import { lazy } from 'react';
 import MainLayout from '../layouts/mainlayout/MainLayout';
 import AuthLayout from '../layouts/authlayout/AuthLayout';
 import NotFound from '../pages/notfound/NotFound';
 import RequireAuth from '../components/RequireAuth';
 
-const Todos = lazy(() => import('../pages/todos/Todos'));
-const Login = lazy(() => import('../pages/login/Login'));
-const Register = lazy(() => import('../pages/register/Register'));
-const Profile = lazy(() => import('../pages/profile/Profile'));
+import Todos from '../pages/todos/Todos';
+import Login from '../pages/login/Login';
+import Register from '../pages/register/Register';
+import Profile from '../pages/profile/Profile';
+
+// const Todos = lazy(() => import('../pages/todos/Todos'));
+// const Login = lazy(() => import('../pages/login/Login'));
+// const Register = lazy(() => import('../pages/register/Register'));
+// const Profile = lazy(() => import('../pages/profile/Profile'));
 
 const routes = [
     {
