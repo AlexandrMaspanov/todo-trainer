@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import InputField from '../../inputField/InputField';
 import CustomSelect from '../../customSelect/CustomSelect';
 import CustomButton from '../../customButton/CustomButton';
+import AvatarUpload from '../../UI/avatarUpload/AvatarUpload';
 import styles from './EditProfileForm.module.css';
 
 const genderOptions = [
@@ -28,7 +29,7 @@ const EditProfileForm = ({ user, onClose }) => {
   }
 
   const handleChange = (field) => (value) => {
-    console.log('Изменение профила', { [field]: value });
+    console.log('Изменение профиля', { [field]: value });
     setFormData((prev) => ({ ...prev, [field]: value }));
   }
 
@@ -38,13 +39,10 @@ const EditProfileForm = ({ user, onClose }) => {
 
       <div className={styles.topRow}>
         <div className={styles.photoSection}>
-          <label htmlFor="photo">Фото</label>
-          <InputField
+          <AvatarUpload
             id='photo'
-            type='file'
             value={formData.photo}
             onChange={handleChange('photo')}
-            placeholder='Фото'
           />
         </div>
         <div className={styles.fieldsSection}>
