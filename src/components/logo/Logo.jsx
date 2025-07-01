@@ -1,12 +1,13 @@
 import React from 'react';
 import styles from './Logo.module.css';
+import logo from '../../assets/logo.png';
 
 const Logo = () => {
   return (
     <div className={styles.logo}>
-      <h1>Logo</h1>
+      <img src={logo} alt="todo-trainer logo" className={styles.logoImg} />
     </div>
   );
-}
+};
 
 export default Logo;

@@ -1,0 +1,21 @@
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 10rem;
+    height: 2rem;
+    overflow: hidden;
+}
+
+.logoImg {
+    height: 10rem;
+    width: auto;
+    object-fit: cover;
+    user-select: none;
+}
+
+@media (max-width: 500px) {
+    .logoImg {
+        height: 8rem;
+    }
+}
