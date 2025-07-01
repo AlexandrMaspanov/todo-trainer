@@ -6,7 +6,6 @@ const CustomButton = ({
     type = 'button',
     className = '',
     variant = 'primary',
-    hint,
     fullWidth = false,
     ariaLabel,
     ...props
@@ -23,7 +22,6 @@ const CustomButton = ({
             >
                 {children}
             </button>
-            {hint && <span className={styles.tooltip}>{hint}</span>}
         </div>
     );
 }

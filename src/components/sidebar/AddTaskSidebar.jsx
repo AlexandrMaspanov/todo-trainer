@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addTodo } from '../../store/todoSlice';
 import { useBodyScrollLock } from '../../hooks/useBodyScrollLock';
+import Tooltip from '../tooltip/Tooltip';
 import CustomButton from '../customButton/CustomButton';
 import InputField from '../inputField/InputField';
 import styles from './AddTaskSidebar.module.css';
@@ -27,7 +28,7 @@ const AddTaskSidebar = ({ isSidebarOpen, onClose }) => {
     const title = inputValue.trim();
     if (!title) return;
 
-    dispatch(addTodo({title}));
+    dispatch(addTodo({ title }));
 
     setInputValue('');
     onClose();
@@ -48,7 +49,14 @@ const AddTaskSidebar = ({ isSidebarOpen, onClose }) => {
     <aside className={`${styles.sidebar} ${isSidebarOpen ? styles.open : ''}`}>
       <div className={styles.header}>
         <h2>Новая задача</h2>
-        <CustomButton variant='minimal' onClick={onClose}>X</CustomButton>
+        <Tooltip hint='Закрыть' delay={200}>
+          <CustomButton
+            variant='minimal'
+            onClick={onClose}
+          >
+            X
+          </CustomButton>
+        </Tooltip>
       </div>
 
       <form className={styles.form} onSubmit={handleSubmit}>
@@ -56,10 +64,15 @@ const AddTaskSidebar = ({ isSidebarOpen, onClose }) => {
           ref={inputRef}
           value={inputValue}
           onChange={setInputValue}
-          placeholder = 'Введите название задачи'
+          placeholder='Введите название задачи'
           required
         />
-        <CustomButton type='submit' className={styles.submitButton}>Добавить</CustomButton>
+        <CustomButton
+          type='submit'
+          className={styles.submitButton}
+        >
+          Добавить
+        </CustomButton>
       </form>
     </aside>
   );

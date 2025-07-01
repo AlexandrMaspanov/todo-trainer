@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toggleTodoComplete, updateTodo, removeTodo } from '../../../store/todoSlice';
 import { startEditing, stopEditing } from '../../../store/uiSlice';
 import { useBodyScrollLock } from '../../../hooks/useBodyScrollLock';
+import Tooltip from '../../tooltip/Tooltip';
 import InputField from '../../inputField/InputField';
 import CustomButton from '../../customButton/CustomButton';
 import styles from './TodoItem.module.css';
@@ -84,51 +85,60 @@ const TodoItem = forwardRef((props, ref) => {
                         className={styles.inputEdit}
                         autoFocus
                     />
-                    <div className={styles.editButtons}>
-                        <CustomButton
-                            variant="minimal"
-                            aria-label="Сохранить изменения"
-                            onClick={handleSave}
-                        >
-                            ✔
-                        </CustomButton>
 
-                        <CustomButton
-                            variant="minimal"
-                            aria-label="Отменить редактирование"
-                            onClick={handleCancel}
-                        >
-                            ✖
-                        </CustomButton>
+                    <div className={styles.editButtons}>
+                        <Tooltip hint='Сохранить' delay={200}>
+                            <CustomButton
+                                variant='minimal'
+                                aria-label='Сохранить изменения'
+                                onClick={handleSave}
+                            >
+                                ✔
+                            </CustomButton>
+                        </Tooltip>
+
+                        <Tooltip hint='Отменить' delay={200}>
+                            <CustomButton
+                                variant='minimal'
+                                aria-label='Отменить редактирование'
+                                onClick={handleCancel}
+                            >
+                                ✖
+                            </CustomButton>
+                        </Tooltip>
                     </div>
                 </>
             ) : (
                 <>
                     <input
-                        type="checkbox"
+                        type='checkbox'
                         checked={completed}
                         onChange={handleToggle}
                         className={styles.inputCheckbox}
                         readOnly
                     />
                     <span className={styles.title}>{title}</span>
+
                     <div className={styles.todosButtons}>
-                        <CustomButton
-                            variant="ghost"
-                            aria-label="Редактировать задачу"
-                            onClick={handleEdit}
-                        >
-                            ✎
-                        </CustomButton>
+                        <Tooltip hint='Редактировать' delay={200}>
+                            <CustomButton
+                                variant='ghost'
+                                aria-label='Редактировать задачу'
+                                onClick={handleEdit}
+                            >
+                                ✎
+                            </CustomButton>
+                        </Tooltip>
 
-                        <CustomButton
-                            variant="ghost"
-                            aria-label="Удалить задачу"
-                            onClick={handleDelete}
-                        >
-                            🗑
-                        </CustomButton>
-
+                        <Tooltip hint='Удалить' delay={200}>
+                            <CustomButton
+                                variant='ghost'
+                                aria-label='Удалить задачу'
+                                onClick={handleDelete}
+                            >
+                                🗑
+                            </CustomButton>
+                        </Tooltip>
                     </div>
                 </>
             )}

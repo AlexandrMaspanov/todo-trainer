@@ -7,12 +7,25 @@
 }
 
 .title {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
     font-size: 1.1rem;
     font-weight: 500;
-    margin-bottom: 0.5rem;
 }
 
-.hint {
-    font-size: 0.95rem;
-    color: #b0bec5;
+.hintTarget {
+    display: inline-block;
+    width: 1.2rem;
+    height: 1.2rem;
+    line-height: 1.2rem;
+    text-align: center;
+    border-radius: 50%;
+    background-color: #b0bec5;
+    color: #fff;
+    font-size: 0.85rem;
+    cursor: help;
+    user-select: none;
 }
