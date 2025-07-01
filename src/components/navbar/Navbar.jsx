@@ -6,8 +6,8 @@ const Navbar = () => {
   return (
     <nav className={styles.navbar}>
       <ul className={styles.navbarLinks}>
-        <NavItem to='/'>Главная</NavItem>
-        <NavItem to='/profile'>Профиль</NavItem>
+        <li><NavItem to='/'>Главная</NavItem></li>
+        <li><NavItem to='/profile'>Профиль</NavItem></li>
       </ul>
     </nav>
   );
