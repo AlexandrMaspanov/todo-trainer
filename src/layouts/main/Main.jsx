@@ -4,7 +4,7 @@ import styles from './Main.module.css';
 
 const Main = () => {
   return (
-    <main className={styles.main}>
+    <main className={`${styles.main} fadeIn`}>
       <Suspense fallback={<div>Загрузка...</div>}>
         <Outlet />
       </Suspense>

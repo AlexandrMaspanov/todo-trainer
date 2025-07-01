@@ -4,7 +4,7 @@ import styles from './AuthLayout.module.css';
 
 const AuthLayout = () => {
     return (
-        <main className={styles.authLayout}>
+        <main className={`${styles.authLayout} fadeIn`}>
             <Outlet />
         </main>
     );
