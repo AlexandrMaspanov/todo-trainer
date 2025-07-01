@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
+import AvatarUpload from '../../UI/avatarUpload/AvatarUpload';
 import InputField from '../../inputField/InputField';
 import CustomSelect from '../../customSelect/CustomSelect';
 import CustomButton from '../../customButton/CustomButton';
-import AvatarUpload from '../../UI/avatarUpload/AvatarUpload';
+import DeleteProfileButton from '../deleteProfileButton/DeleteProfileButton';
 import {
   getCurrentUserId,
   updateUserById
@@ -126,13 +127,21 @@ const EditProfileForm = ({ user, onClose }) => {
       </div>
 
       <div className={styles.editProfileActions}>
-        <CustomButton type='submit' variant='primary'>
+        <CustomButton
+          type='submit'
+          variant='primary'
+        >
           Сохранить
         </CustomButton>
-        <CustomButton onClick={onClose} variant='outline'>
+        <CustomButton
+          variant='outline'
+          onClick={onClose}
+        >
           Отмена
         </CustomButton>
       </div>
+
+      <DeleteProfileButton />
     </form>
   );
 }

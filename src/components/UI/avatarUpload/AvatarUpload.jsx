@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { useSnackbarContext } from '../../../context/SnackbarProvider';
 import CustomButton from '../../customButton/CustomButton';
+import { SNACK_TYPES } from '../../../constants';
 import styles from './AvatarUpload.module.css';
 
 const MAX_FILE_SIZE = 1024 * 1024 * 2; // 2MB
@@ -19,7 +20,7 @@ const AvatarUpload = ({ value, onChange }) => {
     if (!file) return;
 
     if (file.size > MAX_FILE_SIZE) {
-      showSnackbar('Файл слишком большой (максимум 2MB)', 'error');
+      showSnackbar('Файл слишком большой (максимум 2MB)', SNACK_TYPES.ERROR);
       return;
     }
 

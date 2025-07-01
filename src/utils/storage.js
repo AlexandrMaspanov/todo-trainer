@@ -30,15 +30,21 @@ export const removeCurrentUserId = () => {
 // Получить из localStorage список задач пользователя по его id
 export const getTodosByUserId = (userId) => {
     if (!userId) return [];
-    const data = localStorage.getItem(`todos: ${userId}`);
+    const data = localStorage.getItem(`todos:${userId}`);
     return data ? JSON.parse(data) : [];
 };
 
 // Сохранить в localStorage список задач пользователя по его id
 export const setTodosByUserId = (userId, todos) => {
     if (!userId) return;
-    localStorage.setItem(`todos: ${userId}`, JSON.stringify(todos));
+    localStorage.setItem(`todos:${userId}`, JSON.stringify(todos));
 };
+
+// Удалить из localStorage список задач пользователя по его id
+export const removeUserTodos = (userId) => {
+    if (!userId) return;
+    localStorage.removeItem(`todos:${userId}`);
+}
 
 // Получить пользователя по его id из localStorage
 export const getUserById = (userId) => {
@@ -59,3 +65,25 @@ export const updateUserById = (userId, patch) => {
 
     setStoragedUsers(updatedUsers);
 };
+
+// Удалить из localStorage профиль текущего пользователя
+export const deleteCurrentUser = () => {
+    const userId = getCurrentUserId();
+    if (!userId) return;
+
+    const users = getStoragedUsers();
+    const updatedUsers = users.filter(user => user.id !== userId);
+    setStoragedUsers(updatedUsers);
+}
+
+// Обобщенная функция
+// Удалить из localStorage список задач пользователя по id,
+// профиль текущего пользователя, id текущего пользователя
+export const purgeCurrentUserData = () => {
+    const userId = getCurrentUserId();
+    if (!userId) return;
+
+    removeUserTodos(userId);
+    deleteCurrentUser();
+    removeCurrentUserId();
+}
