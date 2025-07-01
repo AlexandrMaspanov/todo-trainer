@@ -19,7 +19,7 @@ const TodoItem = forwardRef((props, ref) => {
 
     useImperativeHandle(ref, () => localRef.current);
 
-    useBodyScrollLock(editingId !== null);
+    useBodyScrollLock(isEditing);
 
     useEffect(() => {
         if (isEditing && localRef.current) {

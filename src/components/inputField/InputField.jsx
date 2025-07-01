@@ -17,7 +17,7 @@ const InputField = forwardRef(({
         ref={ref}
         type={type}
         value={value}
-        onChange={(e) => onChange(e.target.value.trim())}
+        onChange={(e) => onChange(e.target.value)}
         required={required}
         className={`${styles.inputField} ${error ? styles.error : ''} ${className}`.trim()}
         {...props}

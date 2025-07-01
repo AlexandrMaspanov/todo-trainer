@@ -47,7 +47,6 @@ const Register = () => {
       name: trimmedName,
       surname: surname.trim() || null,
       patronymic: patronymic.trim() || null,
-      photo: null
     };
     const updatedUsers = [...users, newUser];
 

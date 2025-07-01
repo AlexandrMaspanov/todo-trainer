@@ -27,7 +27,7 @@ export const removeCurrentUserId = () => {
     localStorage.removeItem(USER_ID_KEY);
 };
 
-// Получить список задач пользователя по его id из localStorage
+// Получить из localStorage список задач пользователя по его id
 export const getTodosByUserId = (userId) => {
     if (!userId) return [];
     const data = localStorage.getItem(`todos: ${userId}`);
@@ -40,7 +40,7 @@ export const setTodosByUserId = (userId, todos) => {
     localStorage.setItem(`todos: ${userId}`, JSON.stringify(todos));
 };
 
-// Получит пользователя по его id из localStorage
+// Получить пользователя по его id из localStorage
 export const getUserById = (userId) => {
     if (!userId) return null;
 
