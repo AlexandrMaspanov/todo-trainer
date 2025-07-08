@@ -1,11 +1,10 @@
 import React from 'react';
-import { getCurrentUserId, getUserById } from '../../utils/storage';
+import { useUser } from '../../context/UserContext';
 import ProfileDropdown from '../profileMenu/ProfileDropdown';
 import styles from './AuthSection.module.css';
 
 const AuthSection = () => {
-    const userId = getCurrentUserId();
-    const currentUser = userId ? getUserById(userId) : null;
+    const { currentUser } = useUser();
 
     if (!currentUser) return null;
 

@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import { useUser } from '../../../context/UserContext';
 import AvatarUpload from '../../UI/avatarUpload/AvatarUpload';
 import InputField from '../../inputField/InputField';
 import CustomSelect from '../../customSelect/CustomSelect';
 import CustomButton from '../../customButton/CustomButton';
 import DeleteProfileButton from '../deleteProfileButton/DeleteProfileButton';
+
 import {
   getCurrentUserId,
   updateUserById
@@ -26,6 +28,7 @@ const EditProfileForm = ({ user, onClose }) => {
     email: user.email || '',
     photo: user.photo || '',
   });
+  const { setCurrentUser } = useUser();
 
   const handleChange = (field) => (value) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
@@ -41,6 +44,7 @@ const EditProfileForm = ({ user, onClose }) => {
     }
 
     updateUserById(userId, formData);
+    setCurrentUser(formData);
     onClose();
   }
 
