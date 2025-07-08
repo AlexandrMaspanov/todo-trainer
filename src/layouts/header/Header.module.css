@@ -8,11 +8,31 @@
 }
 
 .headerContainer {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 1rem;
+}
+
+.left {
+    justify-self: start;
+}
+
+.center {
+    justify-self: center;
+}
+
+.right {
+    justify-self: end;
+}
+
+@media (max-width: 768px) {
+    .headerContainer {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
 }
