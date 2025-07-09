@@ -45,6 +45,7 @@ const Navbar = () => {
       >
         <li onClick={() => setOpen(prev => !prev)}><NavItem to='/'>Главная</NavItem></li>
         <li onClick={() => setOpen(prev => !prev)}><NavItem to='/profile'>Профиль</NavItem></li>
+        <li onClick={() => setOpen(prev => !prev)}><NavItem to='/test'>Тест</NavItem></li>
       </ul>
     </nav>
   );

@@ -5,14 +5,16 @@ import NotFound from '../pages/notfound/NotFound';
 import RequireAuth from '../components/RequireAuth';
 
 import Todos from '../pages/todos/Todos';
+import Profile from '../pages/profile/Profile';
+import Test from '../pages/test/Test';
 import Login from '../pages/login/Login';
 import Register from '../pages/register/Register';
-import Profile from '../pages/profile/Profile';
 
 // const Todos = lazy(() => import('../pages/todos/Todos'));
 // const Login = lazy(() => import('../pages/login/Login'));
 // const Register = lazy(() => import('../pages/register/Register'));
 // const Profile = lazy(() => import('../pages/profile/Profile'));
+// const Test = lazy(() => import('../pages/test/Test'));
 
 const routes = [
     {
@@ -22,6 +24,7 @@ const routes = [
         children: [
             { index: true, element: <Todos /> },
             { path: 'profile', element: <Profile /> },
+            { path: 'test', element: <Test /> },
         ],
     },
     {
