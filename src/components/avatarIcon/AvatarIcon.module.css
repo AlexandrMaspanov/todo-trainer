@@ -1,3 +1,26 @@
+.wrapper {
+    display: inline-block;
+    border-radius: 50%;
+    padding: 4px;
+    border: 2px solid transparent;
+}
+
+.wrapper.planner {
+    border-color: #4a79da;
+}
+
+.wrapper.prioritizer {
+    border-color: #f5a623;
+}
+
+.wrapper.organizer {
+    border-color: #50c878;
+}
+
+.wrapper.visualizer {
+    border-color: #b55efc;
+}
+
 .avatar {
     width: 2.25rem;
     height: 2.25rem;

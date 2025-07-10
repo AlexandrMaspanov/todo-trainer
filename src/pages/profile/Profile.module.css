@@ -4,45 +4,12 @@
     padding: 2rem 1rem;
 }
 
-.profileSection {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 2rem 1rem;
-}
-
 .headerRow {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 1.5rem;
     gap: 1rem;
-}
-
-.card {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-    margin-top: 1.5rem;
-    padding: 1rem;
-    border-radius: 0.75rem;
-    background-color: #f0f4f7;
-}
-
-.avatar {
-    width: 4rem;
-    height: 4rem;
-    object-fit: cover;
-    border-radius: 50%;
-}
-
-.icon {
-    font-size: 4rem;
-    color: #90a4ae;
-}
-
-.info p {
-    margin: 0.25rem 0;
-    font-size: 1rem;
 }
 
 .empty {

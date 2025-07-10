@@ -38,6 +38,8 @@ export default function ResultPieChart({ counts, dominantType }) {
   };
 
   const options = {
+    responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       legend: {
         position: 'bottom',

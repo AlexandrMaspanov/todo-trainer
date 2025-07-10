@@ -1,4 +1,7 @@
 .chartContainer {
     max-width: 420px;
+    width: 100%;
+    height: 280px;
     margin: 2rem auto 1rem;
+    position: relative;
 }

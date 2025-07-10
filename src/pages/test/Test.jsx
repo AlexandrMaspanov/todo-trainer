@@ -1,18 +1,42 @@
-import React, { useState } from 'react';
-import { useQuestions } from '../../hooks/useQuestions';
+import React, { useEffect, useState } from 'react';
+import { useTestData } from '../../hooks/useTestData';
 import { calculateResult } from '../../utils/calculateResult';
-import ResultPieChart from '../../components/testComponents/resultPieChart/ResultPieChart';
-import RadioOption from '../../components/radioOption/RadioOption';
+import { getCurrentUserId, getUserById, updateUserById } from '../../utils/storage';
+import QuestionBlock from '../../components/testComponents/questionBlock/QuestionBlock';
+import ResultDisplay from '../../components/testComponents/resultDisplay/ResultDisplay';
 import CustomButton from '../../components/customButton/CustomButton';
-import Loader from '../../components/UI/loader/Loader';
 import styles from './Test.module.css';
 
 const Test = () => {
   const [answers, setAnswers] = useState({});
   const [step, setStep] = useState('intro'); // intro | test | result
   const [resultData, setResultData] = useState(null);
+  const {
+    questions,
+    isFetching,
+    refetchQuestions,
+    refetchResults
+  } = useTestData();
 
-  const { data: questions, isFetching, refetch } = useQuestions();
+  useEffect(() => {
+    const preloadResult = async () => {
+      const user = getUserById(getCurrentUserId());
+
+      if (user?.testResult?.type) {
+        const { data } = await refetchResults();
+        const type = user.testResult.type;
+
+        setStep('result');
+        setResultData({
+          type,
+          counts: {},
+          result: data[type]
+        });
+      }
+    };
+
+    preloadResult();
+  }, []);
 
   const handleAnswer = (questionId, option) => {
     setAnswers((prev) => ({ ...prev, [questionId]: option }));
@@ -21,13 +45,20 @@ const Test = () => {
   const handleStart = async () => {
     setAnswers({});
     setStep('test');
-    await refetch();
+    await refetchQuestions();
   };
 
   const handleShowResult = async () => {
     setStep('result');
     const res = await calculateResult(answers, questions);
     setResultData(res);
+
+    updateUserById(getCurrentUserId(), {
+      testResult: {
+        type: res.type,
+        timestamp: Date.now()
+      }
+    });
   };
 
   const handleRetry = () => {
@@ -35,77 +66,42 @@ const Test = () => {
     setStep('intro');
   };
 
-  return (
-    <div className={styles.test}>
-      <h1 className={styles.title}>Тест продуктивности</h1>
+  const isReadyToDisplayResult = step === 'result' && resultData;
 
-      {step === 'intro' && (
+  return (
+    <section className={styles.testSection}>
+      <div className={styles.headerRow}>
+        <h1 className="pageTitle">Тест продуктивности</h1>
+      </div>
+
+      {isReadyToDisplayResult && (
+        <ResultDisplay
+          resultData={resultData}
+          onRetry={handleRetry}
+        />
+      )}
+
+      {step === 'intro' && !resultData && (
         <>
           <p className={styles.description}>
             Этот тест поможет определить ваш стиль продуктивности: организованный планировщик, приоритетчик, визуализатор или командный организатор. Вы узнаете, какой подход к работе наиболее соответствует вашему мышлению.
           </p>
           <div className={styles.centeredButton}>
-            <CustomButton onClick={handleStart} variant="primary">
-              Пройти тест
-            </CustomButton>
+            <CustomButton onClick={handleStart} variant="primary">Пройти тест</CustomButton>
           </div>
-
         </>
       )}
 
       {step === 'test' && (
-        <>
-          {isFetching && <Loader />}
-
-          {questions?.map(q => (
-            <div key={q.id} className={styles.questionBlock}>
-              <p className={styles.questionText}><strong>{q.text}</strong></p>
-              {q.options.map(option => (
-                <RadioOption
-                  key={option.label}
-                  name={`q${q.id}`}
-                  label={option.label}
-                  value={option.label}
-                  checked={answers[q.id] === option.label}
-                  onChange={() => handleAnswer(q.id, option.label)}
-                />
-              ))}
-            </div>
-          ))}
-
-          {questions && !isFetching && (
-            <div className={styles.centeredButton}>
-              <CustomButton
-                onClick={handleShowResult}
-                disabled={Object.keys(answers).length < (questions?.length || 1)}
-                variant="primary"
-              >
-                Показать результат
-              </CustomButton >
-            </div>
-          )}
-        </>
+        <QuestionBlock
+          questions={questions}
+          answers={answers}
+          isFetching={isFetching}
+          onAnswer={handleAnswer}
+          onSubmit={handleShowResult}
+        />
       )}
-
-      {step === 'result' && resultData && (
-        <>
-          <h2 className={styles.title}>{resultData.result.title}</h2>
-
-          <ResultPieChart
-            counts={resultData.counts}
-            dominantType={resultData.type}
-          />
-
-          <p className={styles.description}>{resultData.result.description}</p>
-
-          <div className={styles.centeredButton}>
-            <CustomButton onClick={handleRetry} variant="outline">
-              Пройти тест ещё раз
-            </CustomButton>
-          </div>
-        </>
-      )}
-    </div>
+    </section>
   );
 }
 

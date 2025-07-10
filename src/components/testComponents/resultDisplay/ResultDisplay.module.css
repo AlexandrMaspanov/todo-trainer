@@ -1,0 +1,38 @@
+.resultCard {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    max-width: 30rem;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: #ffffff;
+    border-radius: 0.75rem;
+    box-shadow: 0 6px 16px rgba(96, 125, 139, 0.06);
+}
+
+.title {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: #37474f;
+    text-align: center;
+}
+
+.description {
+    font-size: 1rem;
+    color: #607d8b;
+    line-height: 1.6;
+    text-align: center;
+}
+
+.chart {
+    display: flex;
+    justify-content: center;
+    margin: 0;
+}
+
+.buttonGroup {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+}
