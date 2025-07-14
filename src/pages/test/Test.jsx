@@ -29,7 +29,7 @@ const Test = () => {
         setStep('result');
         setResultData({
           type,
-          counts: {},
+          counts: user.testResult.counts,
           result: data[type]
         });
       }
@@ -56,6 +56,7 @@ const Test = () => {
     updateUserById(getCurrentUserId(), {
       testResult: {
         type: res.type,
+        counts: res.counts,
         timestamp: Date.now()
       }
     });
@@ -63,6 +64,7 @@ const Test = () => {
 
   const handleRetry = () => {
     setAnswers({});
+    setResultData(null);
     setStep('intro');
   };
 
