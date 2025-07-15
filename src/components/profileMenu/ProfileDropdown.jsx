@@ -48,10 +48,7 @@ const ProfileDropdown = () => {
                 aria-label='Профиль'
                 onClick={() => setOpen(prev => !prev)}
             >
-                <AvatarIcon
-                    photo={currentUser.photo}
-                    type={currentUser.testResult?.type}
-                />
+                <AvatarIcon />
             </CustomButton>
 
             {open && (

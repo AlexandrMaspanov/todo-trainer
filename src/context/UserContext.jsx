@@ -4,15 +4,15 @@ import { getCurrentUserId, getUserById } from '../utils/storage';
 const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
+  const [currentUserId, setCurrentUserId] = useState(getCurrentUserId());
   const [currentUser, setCurrentUser] = useState(null);
 
   useEffect(() => {
-    const id = getCurrentUserId();
-    if (id) {
-      const user = getUserById(id);
+    if (currentUserId) {
+      const user = getUserById(currentUserId);
       setCurrentUser(user);
     }
-  }, []);
+  }, [currentUserId]);
 
   return (
     <UserContext.Provider value={{ currentUser, setCurrentUser }}>

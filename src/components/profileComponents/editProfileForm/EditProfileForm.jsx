@@ -5,11 +5,7 @@ import InputField from '../../inputField/InputField';
 import CustomSelect from '../../customSelect/CustomSelect';
 import CustomButton from '../../customButton/CustomButton';
 import DeleteProfileButton from '../deleteProfileButton/DeleteProfileButton';
-
-import {
-  getCurrentUserId,
-  updateUserById
-} from '../../../utils/storage';
+import { getCurrentUserId, updateUserById } from '../../../utils/storage';
 import styles from './EditProfileForm.module.css';
 
 const genderOptions = [
@@ -27,6 +23,7 @@ const EditProfileForm = ({ user, onClose }) => {
     gender: user.gender || '',
     email: user.email || '',
     photo: user.photo || '',
+    testResult: user.testResult || '',
   });
   const { setCurrentUser } = useUser();
 

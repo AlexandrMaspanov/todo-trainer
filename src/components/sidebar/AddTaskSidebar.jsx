@@ -22,6 +22,11 @@ const AddTaskSidebar = ({ isSidebarOpen, onClose }) => {
     }
   }, [isSidebarOpen]);
 
+  const handleClose = () => {
+    setInputValue('');
+    onClose();
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -30,14 +35,13 @@ const AddTaskSidebar = ({ isSidebarOpen, onClose }) => {
 
     dispatch(addTodo({ title }));
 
-    setInputValue('');
-    onClose();
+    handleClose();
   }
 
   // Esc
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if (e.key === 'Escape') onClose();
+      if (e.key === 'Escape') handleClose();
     };
 
     document.addEventListener('keydown', handleKeyDown);
@@ -52,7 +56,7 @@ const AddTaskSidebar = ({ isSidebarOpen, onClose }) => {
         <Tooltip hint='Закрыть' delay={200}>
           <CustomButton
             variant='minimal'
-            onClick={onClose}
+            onClick={handleClose}
           >
             X
           </CustomButton>

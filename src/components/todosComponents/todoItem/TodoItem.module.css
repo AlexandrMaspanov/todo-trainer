@@ -41,10 +41,6 @@
     font-size: 0.8rem;
 }
 
-.inputEdit {
-    flex: 1;
-}
-
 .editButtons,
 .todosButtons {
     display: flex;

@@ -4,7 +4,8 @@ import { FaUserPlus } from 'react-icons/fa';
 import InputField from '../../components/inputField/InputField';
 import CustomButton from '../../components/customButton/CustomButton';
 import useSnackbar from '../../hooks/useSnackbar';
-import { getStoragedUsers, setCurrentUserId, setStoragedUsers } from '../../utils/storage';
+import { getStoragedUsers, getUserById, setCurrentUserId, setStoragedUsers } from '../../utils/storage';
+import { useUser } from '../../context/UserContext';
 import { SNACK_TYPES } from '../../constants';
 import styles from './Register.module.css';
 
@@ -13,7 +14,7 @@ const Register = () => {
   const [surname, setSurname] = useState('');
   const [patronymic, setPatronymic] = useState('');
   const navigate = useNavigate();
-
+  const { setCurrentUser } = useUser();
   const { showSnackbar } = useSnackbar();
   const minLength = 2;
 
@@ -52,6 +53,8 @@ const Register = () => {
 
     setStoragedUsers(updatedUsers);
     setCurrentUserId(newUser.id);
+    setCurrentUser(getUserById(newUser.id));
+
     showSnackbar('Пользователь зарегистрирован!', SNACK_TYPES.SUCCESS);
 
     navigate('/profile');

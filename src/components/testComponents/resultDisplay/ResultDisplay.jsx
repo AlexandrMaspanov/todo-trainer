@@ -3,18 +3,22 @@ import ResultPieChart from '../resultPieChart/ResultPieChart';
 import EmptyState from '../../emptyState/EmptyState';
 import CustomButton from '../../customButton/CustomButton';
 import useSnackbar from '../../../hooks/useSnackbar';
-import { getCurrentUserId, updateUserById } from '../../../utils/storage';
+import { getCurrentUserId, getUserById, updateUserById } from '../../../utils/storage';
+import { useUser } from '../../../context/UserContext';
 import { SNACK_TYPES } from '../../../constants';
 import styles from './ResultDisplay.module.css';
 
 const ResultDisplay = ({ resultData, onRetry }) => {
   const { showSnackbar } = useSnackbar();
+  const { setCurrentUser } = useUser();
 
   const hasValidCounts = resultData.counts &&
     Object.values(resultData.counts).some(value => value > 0);
 
   const handleRetry = () => {
-    updateUserById(getCurrentUserId(), { testResult: null });
+    const userId = getCurrentUserId();
+    updateUserById(userId, { testResult: null });
+    setCurrentUser(getUserById(userId));
     onRetry(); // сброс состояния теста
   };
 

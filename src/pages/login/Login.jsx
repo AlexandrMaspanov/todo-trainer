@@ -9,7 +9,8 @@ import CustomSelect from '../../components/customSelect/CustomSelect';
 import Loader from '../../components/UI/loader/Loader';
 import useSnackbar from '../../hooks/useSnackbar';
 import { setTodos } from '../../store/todoSlice';
-import { getStoragedUsers, getTodosByUserId, setCurrentUserId } from '../../utils/storage';
+import { getStoragedUsers, getTodosByUserId, getUserById, setCurrentUserId } from '../../utils/storage';
+import { useUser } from '../../context/UserContext';
 import { SNACK_TYPES } from '../../constants';
 import styles from './Login.module.css';
 
@@ -20,6 +21,7 @@ const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { showSnackbar } = useSnackbar();
+  const { setCurrentUser } = useUser();
 
   useEffect(() => {
     setUsers(getStoragedUsers());
@@ -40,6 +42,7 @@ const Login = () => {
 
     setLoading(true);
     setCurrentUserId(selectedUserId);
+    setCurrentUser(getUserById(selectedUserId));
 
     const userTodos = getTodosByUserId(selectedUserId);
     dispatch(setTodos(userTodos));

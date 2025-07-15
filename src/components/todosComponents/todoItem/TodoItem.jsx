@@ -82,7 +82,6 @@ const TodoItem = forwardRef((props, ref) => {
                         onChange={setTempTitle}
                         onKeyDown={handleKeyDown}
                         placeholder='Введите название задачи'
-                        className={styles.inputEdit}
                         autoFocus
                     />
 

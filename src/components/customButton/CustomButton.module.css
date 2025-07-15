@@ -19,6 +19,15 @@
         box-shadow 0.3s ease;
 }
 
+.button:hover {
+    box-shadow: 2px 2px 4px rgba(96, 125, 139, 0.3);
+}
+
+.button:active {
+    transform: translate(1px, 1px);
+    box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.5);
+}
+
 /* === Primary (по умолчанию) === */
 .primary {
     background-color: #607d8b;
@@ -28,12 +37,6 @@
 
 .primary:hover {
     background-color: #546e7a;
-    box-shadow: 2px 2px 4px rgba(96, 125, 139, 0.3);
-}
-
-.primary:active {
-    transform: translate(1px, 1px);
-    box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.5);
 }
 
 /* === Outline === */
@@ -48,11 +51,6 @@
     color: #37474f;
 }
 
-.outline:active {
-    transform: translate(1px, 1px);
-    box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.2);
-}
-
 /* === Ghost === */
 .ghost {
     padding: 0.25rem;
@@ -64,10 +62,6 @@
 
 .ghost:hover {
     background-color: rgba(96, 125, 139, 0.05);
-}
-
-.ghost:active {
-    transform: translate(1px, 1px);
 }
 
 /* === Минимальный === */
@@ -106,9 +100,10 @@
 }
 
 .button:disabled {
-    /*opacity: 0.6; /*- просвечивается из под Header*/
+    opacity: 0.6;
     background-color: #cfd8dc;
     color: #777;
     cursor: not-allowed;
     box-shadow: none;
+    transform: none;
 }

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useTestData } from '../../hooks/useTestData';
 import { calculateResult } from '../../utils/calculateResult';
 import { getCurrentUserId, getUserById, updateUserById } from '../../utils/storage';
+import { useUser } from '../../context/UserContext';
 import QuestionBlock from '../../components/testComponents/questionBlock/QuestionBlock';
 import ResultDisplay from '../../components/testComponents/resultDisplay/ResultDisplay';
 import CustomButton from '../../components/customButton/CustomButton';
@@ -17,6 +18,7 @@ const Test = () => {
     refetchQuestions,
     refetchResults
   } = useTestData();
+  const { setCurrentUser } = useUser();
 
   useEffect(() => {
     const preloadResult = async () => {
@@ -60,6 +62,7 @@ const Test = () => {
         timestamp: Date.now()
       }
     });
+    setCurrentUser(getUserById(getCurrentUserId()));
   };
 
   const handleRetry = () => {

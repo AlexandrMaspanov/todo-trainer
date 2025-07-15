@@ -2,7 +2,7 @@
     position: fixed;
     inset: 0;
     opacity: 0;
-    /* background: rgba(0, 0, 0, 0); удалить - ??? */
+    background: rgba(0, 0, 0, 0);
     pointer-events: none;
     transition: opacity 0.3s ease-in-out;
     z-index: 999;
