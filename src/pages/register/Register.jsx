@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { FaUserPlus } from 'react-icons/fa';
 import InputField from '../../components/inputField/InputField';
 import CustomButton from '../../components/customButton/CustomButton';
+import Tooltip from '../../components/tooltip/Tooltip';
+import { useFormValidation } from '../../hooks/useFormValidation';
 import useSnackbar from '../../hooks/useSnackbar';
 import { getStoragedUsers, getUserById, setCurrentUserId, setStoragedUsers } from '../../utils/storage';
 import { useUser } from '../../context/UserContext';
@@ -10,18 +12,25 @@ import { SNACK_TYPES } from '../../constants';
 import styles from './Register.module.css';
 
 const Register = () => {
-  const [name, setName] = useState('');
-  const [surname, setSurname] = useState('');
-  const [patronymic, setPatronymic] = useState('');
+  const [formData, setFormData] = useState({
+    name: '',
+    surname: '',
+    patronymic: ''
+  });
+  const { errors, isValid } = useFormValidation(formData);
   const navigate = useNavigate();
   const { setCurrentUser } = useUser();
   const { showSnackbar } = useSnackbar();
   const minLength = 2;
 
+  const handleChange = (field) => (value) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
+  }
+
   const handleRegister = (e) => {
     e.preventDefault();
 
-    const trimmedName = name.trim();
+    const trimmedName = formData.name.trim();
 
     if (!trimmedName) {
       showSnackbar('Имя не может быть пустым', SNACK_TYPES.ERROR);
@@ -46,8 +55,8 @@ const Register = () => {
     const newUser = {
       id: newUserId,
       name: trimmedName,
-      surname: surname.trim() || null,
-      patronymic: patronymic.trim() || null,
+      surname: formData.surname.trim() || null,
+      patronymic: formData.patronymic.trim() || null,
     };
     const updatedUsers = [...users, newUser];
 
@@ -68,30 +77,43 @@ const Register = () => {
           <FaUserPlus className={styles.icon} />
         </label>
 
-        <InputField
-          autoFocus
-          id='username'
-          value={name}
-          onChange={setName}
-          placeholder='Имя *'
-          required
-        />
+        <Tooltip hint={errors.name || ''} delay={300}>
+          <InputField
+            id='username'
+            autoFocus
+            value={formData.name}
+            onChange={handleChange('name')}
+            placeholder='Имя *'
+            required
+            error={errors.name}
+          />
+        </Tooltip>
 
-        <InputField
-          id="surname"
-          value={surname}
-          onChange={setSurname}
-          placeholder="Фамилия"
-        />
+        <Tooltip hint={errors.surname || ''} delay={300}>
+          <InputField
+            id='surname'
+            value={formData.surname}
+            onChange={handleChange('surname')}
+            placeholder='Фамилия'
+            error={errors.surname}
+          />
+        </Tooltip>
 
-        <InputField
-          id="patronymic"
-          value={patronymic}
-          onChange={setPatronymic}
-          placeholder="Отчество"
-        />
+        <Tooltip hint={errors.patronymic || ''} delay={300}>
+          <InputField
+            id='patronymic'
+            value={formData.patronymic}
+            onChange={handleChange('patronymic')}
+            placeholder='Отчество'
+            error={errors.patronymic}
+          />
+        </Tooltip>
 
-        <CustomButton type='submit' fullWidth>
+        <CustomButton
+          type='submit'
+          fullWidth
+          disabled={!isValid}
+        >
           Зарегистрироваться
         </CustomButton>
       </form>
