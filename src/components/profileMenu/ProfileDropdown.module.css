@@ -1,4 +1,6 @@
 .dropdown {
+    display: flex;
+    flex-direction: column;
     position: absolute;
     top: calc(100% + 0.5rem);
     right: 0;
@@ -36,7 +38,7 @@
     color: #333;
 }
 
-.logoutItem {
+.dropdownItem {
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -45,9 +47,12 @@
     border: none;
     border-radius: 0.25rem;
     font-size: 0.9rem;
-    color: #e53935;
     cursor: pointer;
-    transition: background 0.15s ease;
+    transition: background-color 0.15s ease;
+}
+
+.logoutItem {
+    color: #e53935;
 }
 
 .logoutItem:hover {

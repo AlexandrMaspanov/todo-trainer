@@ -13,6 +13,10 @@ const ProfileDropdown = () => {
     const userId = getCurrentUserId();
     const currentUser = userId ? getUserById(userId) : null;
 
+    const handleReg = () => {
+        navigate('/register', { state: { from: location.pathname } })
+    }
+
     const handleLogout = () => {
         removeCurrentUserId();
         navigate('/login');
@@ -56,8 +60,16 @@ const ProfileDropdown = () => {
                     <p className={styles.name}>{currentUser.name}</p>
                     <CustomButton
                         variant='icon'
+                        aria-label='Регистрация'
+                        className={styles.dropdownItem}
+                        onClick={handleReg}
+                    >
+                        <span>Регистрация</span>
+                    </CustomButton>
+                    <CustomButton
+                        variant='icon'
                         aria-label='Выйти'
-                        className={styles.logoutItem}
+                        className={`${styles.dropdownItem} ${styles.logoutItem}`}
                         onClick={handleLogout}
                     >
                         <FiLogOut />

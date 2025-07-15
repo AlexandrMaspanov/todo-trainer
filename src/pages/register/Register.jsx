@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { FaUserPlus } from 'react-icons/fa';
 import InputField from '../../components/inputField/InputField';
 import CustomButton from '../../components/customButton/CustomButton';
@@ -18,10 +18,13 @@ const Register = () => {
     patronymic: ''
   });
   const { errors, isValid } = useFormValidation(formData);
+  const location = useLocation();
   const navigate = useNavigate();
   const { setCurrentUser } = useUser();
   const { showSnackbar } = useSnackbar();
   const minLength = 2;
+
+  const from = location.state?.from || '/login'; // если не передано, по умолчанию на страницу login
 
   const handleChange = (field) => (value) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
@@ -69,6 +72,10 @@ const Register = () => {
     navigate('/profile');
   }
 
+  const handleBack = () => {
+    navigate(from);
+  };
+
   return (
     <section className={styles.registerSection}>
       <h1>Регистрация</h1>
@@ -109,13 +116,20 @@ const Register = () => {
           />
         </Tooltip>
 
-        <CustomButton
-          type='submit'
-          fullWidth
-          disabled={!isValid}
-        >
-          Зарегистрироваться
-        </CustomButton>
+        <div className={styles.registerActions}>
+          <CustomButton
+            type='submit'
+            disabled={!isValid}
+          >
+            Зарегистрироваться
+          </CustomButton>
+          <CustomButton
+            variant='outline'
+            onClick={handleBack}
+          >
+            ← Назад
+          </CustomButton>
+        </div>
       </form>
     </section>
   );

@@ -4,6 +4,7 @@ import styles from './CustomLink.module.css';
 
 const CustomLink = ({
     to,
+    state = {},
     children,
     variant = 'primary',
     className = '',
@@ -14,6 +15,7 @@ const CustomLink = ({
     return (
         <Link
             to={to}
+            state={state}
             className={`${styles.link} ${variantClass} ${className}`.trim()}
             {...props}
         >

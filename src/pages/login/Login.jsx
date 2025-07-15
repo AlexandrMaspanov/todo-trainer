@@ -84,7 +84,7 @@ const Login = () => {
       </form>
 
       <p className={styles.loginRedirect}>
-        Нет аккаунта? <CustomLink onClick={() => navigate('/register')}>Зарегистрируйтесь</CustomLink>
+        Нет аккаунта? <CustomLink to="/register" state={{ from: location.pathname }}>Зарегистрируйтесь</CustomLink>
       </p>
     </section>
   );
