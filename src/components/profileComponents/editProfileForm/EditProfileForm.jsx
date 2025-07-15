@@ -4,8 +4,10 @@ import AvatarUpload from '../../UI/avatarUpload/AvatarUpload';
 import InputField from '../../inputField/InputField';
 import CustomSelect from '../../customSelect/CustomSelect';
 import CustomButton from '../../customButton/CustomButton';
+import Tooltip from '../../tooltip/Tooltip';
 import DeleteProfileButton from '../deleteProfileButton/DeleteProfileButton';
 import { getCurrentUserId, updateUserById } from '../../../utils/storage';
+import { useFormValidation } from '../../../hooks/useFormValidation';
 import styles from './EditProfileForm.module.css';
 
 const genderOptions = [
@@ -25,6 +27,7 @@ const EditProfileForm = ({ user, onClose }) => {
     photo: user.photo || '',
     testResult: user.testResult || '',
   });
+  const { errors, isValid } = useFormValidation(formData);
   const { setCurrentUser } = useUser();
 
   const handleChange = (field) => (value) => {
@@ -60,48 +63,60 @@ const EditProfileForm = ({ user, onClose }) => {
         <div className={styles.fieldsSection}>
           <div className={styles.fieldItem}>
             <label htmlFor="username">Имя</label>
-            <InputField
-              id='username'
-              autoFocus
-              value={formData.name}
-              onChange={handleChange('name')}
-              placeholder='Имя *'
-              required
-            />
+            <Tooltip hint={errors.name || ''} delay={300}>
+              <InputField
+                id='username'
+                autoFocus
+                value={formData.name}
+                onChange={handleChange('name')}
+                placeholder='Имя *'
+                required
+                error={errors.name}
+              />
+            </Tooltip>
           </div>
 
           <div className={styles.fieldItem}>
             <label htmlFor="surname">Фамилия</label>
-            <InputField
-              id='surname'
-              value={formData.surname}
-              onChange={handleChange('surname')}
-              placeholder='Фамилия'
-            />
+            <Tooltip hint={errors.surname || ''} delay={300}>
+              <InputField
+                id='surname'
+                value={formData.surname}
+                onChange={handleChange('surname')}
+                placeholder='Фамилия'
+                error={errors.surname}
+              />
+            </Tooltip>
           </div>
 
           <div className={styles.fieldItem}>
             <label htmlFor="patronymic">Отчество</label>
-            <InputField
-              id='patronymic'
-              value={formData.patronymic}
-              onChange={handleChange('patronymic')}
-              placeholder='Отчество'
-            />
+            <Tooltip hint={errors.patronymic || ''} delay={300}>
+              <InputField
+                id='patronymic'
+                value={formData.patronymic}
+                onChange={handleChange('patronymic')}
+                placeholder='Отчество'
+                error={errors.patronymic}
+              />
+            </Tooltip>
           </div>
         </div>
       </div>
 
       <div className={styles.fieldsSection}>
-      <div className={styles.fieldItem}>
+        <div className={styles.fieldItem}>
           <label htmlFor="birthdate">Дата рождения</label>
-          <InputField
-            id='birthdate'
-            type='date'
-            value={formData.birthdate}
-            onChange={handleChange('birthdate')}
-            placeholder='Дата рождения'
-          />
+          <Tooltip hint={errors.birthdate || ''} delay={300}>
+            <InputField
+              id='birthdate'
+              type='date'
+              value={formData.birthdate}
+              onChange={handleChange('birthdate')}
+              placeholder='Дата рождения'
+              error={errors.birthdate}
+            />
+          </Tooltip>
         </div>
 
         <div className={styles.fieldItem}>
@@ -117,13 +132,16 @@ const EditProfileForm = ({ user, onClose }) => {
 
         <div className={styles.fieldItem}>
           <label htmlFor="email">Email</label>
-          <InputField
-            id='email'
-            type='email'
-            value={formData.email}
-            onChange={handleChange('email')}
-            placeholder='Email'
-          />
+          <Tooltip hint={errors.email || ''} delay={300}>
+            <InputField
+              id='email'
+              type='email'
+              value={formData.email}
+              onChange={handleChange('email')}
+              placeholder='Email'
+              error={errors.email}
+            />
+          </Tooltip>
         </div>
       </div>
 
@@ -131,6 +149,7 @@ const EditProfileForm = ({ user, onClose }) => {
         <CustomButton
           type='submit'
           variant='primary'
+          disabled={!isValid}
         >
           Сохранить
         </CustomButton>
