@@ -8,12 +8,26 @@ const AvatarIcon = () => {
   const type = currentUser?.testResult?.type;
   const photo = currentUser?.photo;
 
+  const roleMap = {
+    planner: 'Планировщик',
+    prioritizer: 'Приоритетчик',
+    organizer: 'Организатор',
+    visualizer: 'Визуализатор'
+  };
+
+  const roleLabel = type ? roleMap[type] : null;
+
   return (
     <div className={`${styles.wrapper} ${type && styles[type]}`}>
       {photo ? (
         <img src={photo} alt='Аватар' className={styles.avatar} />
       ) : (
         <FaUserCircle className={styles.placeholder} />
+      )}
+      {roleLabel && (
+        <div className={`${styles.labelWrapper} ${type && styles[type]}`}>
+          <span className={styles.label}>{roleLabel}</span>
+        </div>
       )}
     </div>
   );

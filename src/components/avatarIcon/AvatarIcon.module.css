@@ -1,8 +1,9 @@
 .wrapper {
     display: inline-block;
+    position: relative;
     border-radius: 50%;
     padding: 4px;
-    border: 2px solid transparent;
+    border: 3px solid transparent;
 }
 
 .wrapper.planner {
@@ -27,6 +28,45 @@
     border-radius: 50%;
     object-fit: cover;
     border: 0.1rem solid #ccc;
+}
+
+.labelWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 3px 6px;
+    border-radius: 0.25rem;
+}
+
+.labelWrapper.planner {
+    border-color: #4a79da;
+    background-color: #4a79da;
+}
+
+.labelWrapper.prioritizer {
+    border-color: #f5a623;
+    background-color: #f5a623;
+}
+
+.labelWrapper.organizer {
+    border-color: #50c878;
+    background-color: #50c878;
+}
+
+.labelWrapper.visualizer {
+    border-color: #b55efc;
+    background-color: #b55efc;
+}
+
+.label {
+    font-weight: bold;
+    font-size: 0.5rem;
+    text-transform: uppercase;
+    color: #fff;
 }
 
 .placeholder {
