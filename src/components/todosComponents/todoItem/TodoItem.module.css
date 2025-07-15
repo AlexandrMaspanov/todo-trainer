@@ -14,7 +14,9 @@
 }
 
 .todoItemEditing {
+    position: relative;
     background-color: #f0f4f7;
+    box-shadow: 0 0 8px rgba(33, 150, 243, 0.2);
     z-index: 1001;
 }
 

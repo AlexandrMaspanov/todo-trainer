@@ -2,7 +2,6 @@ import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } f
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleTodoComplete, updateTodo, removeTodo } from '../../../store/todoSlice';
 import { startEditing, stopEditing } from '../../../store/uiSlice';
-import { useBodyScrollLock } from '../../../hooks/useBodyScrollLock';
 import Tooltip from '../../tooltip/Tooltip';
 import InputField from '../../inputField/InputField';
 import CustomButton from '../../customButton/CustomButton';
@@ -19,8 +18,6 @@ const TodoItem = forwardRef((props, ref) => {
     const localRef = useRef(null);
 
     useImperativeHandle(ref, () => localRef.current);
-
-    useBodyScrollLock(isEditing);
 
     useEffect(() => {
         if (isEditing && localRef.current) {

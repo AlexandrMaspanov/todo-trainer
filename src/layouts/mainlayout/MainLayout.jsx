@@ -15,7 +15,7 @@ const MainLayout = () => {
   const editingId = useSelector(state => state.ui.editingId);
   const isSidebarOpen = useSelector(state => state.sidebar.isOpen);
 
-  const showOverlay = editingId !== null || isSidebarOpen;
+  const showOverlay = isSidebarOpen;
 
   const handleOverlayClick = () => {
     if (editingId !== null) {
