@@ -61,6 +61,12 @@ button {
     html {
         font-size: 14px;
     }
+
+    header,
+    main,
+    footer {
+        margin: 0;
+    }
 }
 
 @keyframes fadeInUp {
