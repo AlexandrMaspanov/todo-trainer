@@ -10,6 +10,11 @@
     text-align: center;
 }
 
+.profileFields {
+    display: flex;
+    flex-direction: column;
+}
+
 .topRow {
     display: flex;
     flex-wrap: wrap;
