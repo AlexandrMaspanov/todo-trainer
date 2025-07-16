@@ -9,6 +9,7 @@ import CustomSelect from '../../components/customSelect/CustomSelect';
 import Loader from '../../components/UI/loader/Loader';
 import useSnackbar from '../../hooks/useSnackbar';
 import { setTodos } from '../../store/todoSlice';
+import { setFilter } from '../../store/filterSlice';
 import { getStoragedUsers, getTodosByUserId, getUserById, setCurrentUserId } from '../../utils/storage';
 import { useUser } from '../../context/UserContext';
 import { SNACK_TYPES } from '../../constants';
@@ -46,6 +47,8 @@ const Login = () => {
 
     const userTodos = getTodosByUserId(selectedUserId);
     dispatch(setTodos(userTodos));
+
+    dispatch(setFilter('all'));
 
     showSnackbar('Добро пожаловать!', SNACK_TYPES.SUCCESS);
     navigate('/');

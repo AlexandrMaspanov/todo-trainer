@@ -10,6 +10,7 @@ import useSnackbar from '../../hooks/useSnackbar';
 import { getStoragedUsers, getTodosByUserId, getUserById, setCurrentUserId, setStoragedUsers } from '../../utils/storage';
 import { useUser } from '../../context/UserContext';
 import { setTodos } from '../../store/todoSlice';
+import { setFilter } from '../../store/filterSlice';
 import { SNACK_TYPES } from '../../constants';
 import styles from './Register.module.css';
 
@@ -73,6 +74,7 @@ const Register = () => {
     const userTodos = getTodosByUserId(newUser.id);
     dispatch(setTodos(userTodos));
 
+    dispatch(setFilter('all'));
 
     showSnackbar('Пользователь зарегистрирован!', SNACK_TYPES.SUCCESS);
 
