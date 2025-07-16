@@ -2,9 +2,11 @@
     position: sticky;
     bottom: 0;
     width: 100%;
+    padding: 1rem 0;
     background-color: #ffffff;
     color: #607d8b;
     text-align: center;
-    padding: 1rem 0;
+    border-top: 1px solid #ddd;
     box-shadow: 0 -2px 4px rgba(96, 125, 139, 0.1);
+    font-size: 0.85rem;
 }

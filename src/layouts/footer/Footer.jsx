@@ -4,7 +4,7 @@ import styles from './Footer.module.css';
 const Footer = () => {
   return (
     <footer className={`${styles.footer} fadeIn`}>
-      <h1>Footer</h1>
+      <p>&copy; {new Date().getFullYear()} Todo Trainer</p>
     </footer>
   );
 }
