@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { FaUserPlus } from 'react-icons/fa';
 import InputField from '../../components/inputField/InputField';
 import CustomButton from '../../components/customButton/CustomButton';
 import Tooltip from '../../components/tooltip/Tooltip';
 import { useFormValidation } from '../../hooks/useFormValidation';
 import useSnackbar from '../../hooks/useSnackbar';
-import { getStoragedUsers, getUserById, setCurrentUserId, setStoragedUsers } from '../../utils/storage';
+import { getStoragedUsers, getTodosByUserId, getUserById, setCurrentUserId, setStoragedUsers } from '../../utils/storage';
 import { useUser } from '../../context/UserContext';
+import { setTodos } from '../../store/todoSlice';
 import { SNACK_TYPES } from '../../constants';
 import styles from './Register.module.css';
 
@@ -20,6 +22,7 @@ const Register = () => {
   const { errors, isValid } = useFormValidation(formData);
   const location = useLocation();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { setCurrentUser } = useUser();
   const { showSnackbar } = useSnackbar();
   const minLength = 2;
@@ -66,6 +69,10 @@ const Register = () => {
     setStoragedUsers(updatedUsers);
     setCurrentUserId(newUser.id);
     setCurrentUser(getUserById(newUser.id));
+
+    const userTodos = getTodosByUserId(newUser.id);
+    dispatch(setTodos(userTodos));
+
 
     showSnackbar('Пользователь зарегистрирован!', SNACK_TYPES.SUCCESS);
 
