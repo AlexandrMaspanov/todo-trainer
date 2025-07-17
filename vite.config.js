@@ -5,4 +5,7 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   base: '/todo-trainer/',
   plugins: [react()],
-})
+  build: {
+    chunkSizeWarningLimit: 1000,
+  },
+});
